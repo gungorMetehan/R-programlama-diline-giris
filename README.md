@@ -1,6 +1,6 @@
 # **R Programlama Diline Giriş [Introduction to R Programming Language]**
 
-<img src="https://github.com/gungorMetehan/R-programlama-diline-giris/assets/102655648/94dd04f8-64f6-4b33-8739-9b3ceb16c47f" width="300">
+[<img src="https://github.com/gungorMetehan/R-programlama-diline-giris/assets/102655648/94dd04f8-64f6-4b33-8739-9b3ceb16c47f" width="300">](https://kitap.epodder.org/r-programlama-dili/)
 
 ## İçindekiler (Contents)
 
