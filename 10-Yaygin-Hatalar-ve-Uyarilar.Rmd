@@ -1,0 +1,131 @@
+# Yaygın Hatalar ve Uyarılar
+
+Bu başlık altında sık sık karşılaşılan bazı hata (error) ve uyarı (warning) mesajları listelenmiştir. Bu mesajlar, R'da yaptığınız bir işlemin yarıda kesilmesi ya da size programın bir uyarıda bulunması durumunda alınmış olabilir.
+
+## Hatalar (Errors)
+
+### Tanımlı Olmayan Sütun
+
+Bu hata mesajı (undefined columns selected) genelde bir data frame ile çalışılırken, bu data frame'de filtreleme yapmaya çalışılırken alınır. 
+
+```{r error = TRUE}
+
+veriseti <- data.frame(V1 = c(6, 4, 5, 2, 5),
+                   V2 = c(5, 5, 7, 8, 9),
+                   V3 = c(2, 7, 9, 9, 7))
+
+veriseti[veriseti$V1 > 4]
+```
+
+Burada aslında yapılmaya çalışılan V1 değişkeninin 4'ten büyük olduğu durumlardaki satırları filtrelemektir. Ancak, hata alınmasının nedeni veri setlerinin iki boyutunun (satırlar ve sütunlar) olmasıdır. Bu nedenle, aşağıdaki kodun çalıştırılması gerekmektedir. Böylelikle satırlarda istenen koşulun sağlanıp sağlanmadığı incelenecektir.
+
+```{r error = TRUE}
+
+veriseti <- data.frame(V1 = c(6, 4, 5, 2, 5),
+                   V2 = c(5, 5, 7, 8, 9),
+                   V3 = c(2, 7, 9, 9, 7))
+
+veriseti[veriseti$V1 > 4, ]
+```
+
+### Yazım Hataları
+
+Fonksiyon, değişken, veri seti, nesne ya da paket isimlerinde küçük bir yazım hatası yapılsa dahi bir hata alınacaktır. Aşağıdakilere benzer bir hata alırsanız, çalıştırdığınız kodda bir yazım hatası olup olmadığını incelemeniz gerekmektedir.
+
+```{r error = TRUE}
+# aritmetik ortalama alma işlemi mean() fonksiyonu ile yapılmaktadır
+maen(c(10, 40, 70))
+
+# oluşturulan data frame'deki değişkenin ismi lengths_A'dır, lenghts_A değil
+boyutlar <- data.frame(lengths_A = c(190, 181, 177, 170, 180),
+                       widths_A = c(120, 115, 120, 130, 140))
+boyutlar[, lenghts_A]
+
+# oluşturulan data frame'in adı veriseti'dir, veriSeti değil
+veriseti <- data.frame(V1 = c(6, 4, 5, 2, 5),
+                   V2 = c(5, 5, 7, 8, 9),
+                   V3 = c(2, 7, 9, 9, 7))
+veriSeti
+
+# 1'den 10'a kadar sayılardan oluşan vektör nesnesinin adı yeni_dizi'dir, yeni.dizi değil
+yeni_dizi <- 1:10
+sum(yeni.dizi)
+
+# veri görselleştirmede yaygın olarak kullanılan paketin adı ggplot2'dir, gggplot2 değil
+library("gggplot2")
+```
+
+### if() Kullanımı
+
+<code>if()</code> durum cümlesinin hatalı kullanımı durumunda hata alınabilir.
+
+```{r error = TRUE}
+sayi <- 1:8
+if(sayi > 5) {
+  paste(sayi, "5'ten büyüktür.")
+}
+```
+
+Yukarıdaki örnekte aslında <code>sayi</code> nesnesinin elemanları 5'ten büyükse "5'ten büyüktür." yazısının yazdırılması istenmiştir. Ancak burada hatalı olan, <code>if()</code> fonksiyonunun tek seferde yalnızca bir girdiyi ele alıyor oluşunun atlanmış olmasıdır. Bu nedenle fonksiyon bu örnekte 8 kez işlem yapmayacak ve hata verecektir. İstediğimiz işlemi gerçekleştirmek için <code>ifelse()</code> fonksiyonundan yararlanabiliriz.
+
+```{r error = TRUE}
+sayi <- 1:8
+ifelse(sayi > 5,
+       paste(sayi, "sayisi 5'ten büyüktür."),
+       paste(sayi, "sayisi 5'ten büyük değildir."))
+```
+
+### Hatalı Argüman Kullanımı
+
+Bir fonksiyonun içine gerekli tüm argümanlar girilmelidir. Bunun yanı sıra bir argüman hatalı bir şekilde girilmiş ise program 'unused argument' hatası verecektir. Örneğin;
+
+```{r error = TRUE}
+# normal dağılımdan standart sapması 5 olan 100 değer çekmek için aşağıdaki fonksiyon kullanılabilir. Ancak rnorm() fonksiyonunda standart sapmayı belirtmek için kullanılması gereken argüman sd'dir, ss değil
+rnorm(100, ss = 5)
+```
+
+### İndirilmemiş Paket
+
+R'da bir paketin (package) kullanılabilmesi için önce indirilmesi, sonra çalıştırılması gerekir. İndirmek için `install.packages("paketAdi")` fonksiyonu çalıştırılmalıdır. Bu işlem gerçekleştirilmeden, doğrudan library(paketAdi) yazılır ise 'there is no package called 'paketAdi'' şeklinde bir hata alınacaktır. Bu hata alındığında öncelikle paketin indirilmesi gerektiği fark edilmelidir.
+
+```{r error = TRUE}
+library(ltm)
+```
+
+## Uyarılar (Warnings)
+
+### Farklı Uzunluklardaki Vektörler
+
+Farklı uzunluklardaki vektörler toplanabilir. Ancak program bu işlemi yaparken kullanıcıya bir uyarıda (Warning: longer object length is not a multiple of shorter object length) da bulunur. İki vektörün elemanları toplanırken birinci elemanlardan başlanarak toplama işlemi gerçekleştirilir. Ancak, kısa vektörün son elemanı ile uzun vektörün son elemanı aynı olmadığı için işlem uzun vektörün uzunluğu kadar devam eder ve çıktı vektörü uzun vektör ile aynı uzunlukta olur. 
+
+```{r error = TRUE}
+dizi_A <- 3:11
+dizi_B <- 2:15
+
+# toplama işlemi gerçekleşecektir. Ancak dizi_A'nın son elemanı (11), dizi_B'nin 9. elemanı (10) ile toplandıktan sonra dizi_B'nin 10. elemanı tekrar dizi_A'nın ilk elemanı ile toplanarak işlem devam eder
+dizi_A + dizi_B
+```
+
+### Kayıp Veri
+
+Kayıp veri ile ilgili çeşitli hata ve uyarı mesajları alınabilir. Bunlardan biri NAs Introduced by Coercion'dır. Bir vektör, nümerik vektör olarak kaydedilmeye çalışıldığında bu hata ile karşılaşılabilir.
+
+```{r error = TRUE}
+birkacSayi <- c(15, 14, 15, 16, 15, "Bos", 15, 14)
+
+# birkacSayi isimli vektör as.numeric() fonksiyonu ile nümerik hale getirilebilir. Ancak bu sırada sayısal değeri bulunmayan 6. eleman NA olarak ele alınacaktır
+as.numeric(birkacSayi)
+```
+
+### Standart Sapmanın Sıfır Oluşu
+
+İki vektörün elemanları arasındaki korelasyonu hesaplamak için cor() fonksiyonundan yararlanılabilir. Ancak vektörlerden birindeki standart sapma 0 ise hesaplama gerçekleşemeyecektir. Daha doğrusu sonuç 'NA' olarak dönecektir ve kullanıcıya bir uyarı mesajı gelecektir: the standard deviation is zero.
+
+```{r error = TRUE}
+# 24 tane 50 değerinden oluşan bir vektör
+sinif_1 <- rep(50, 24)
+# ortalaması 50, standart sapması 5 olan normal dağılımdan seçilen 24 değerin üstündeki kendine en yakın tam sayıya yuvarlanmış halinden oluşan, uzunluğu 24 olan bir vektör
+sinif_2 <- ceiling(rnorm(24, mean = 50, sd = 5))
+# cor() fonksiyonu ile korelasyonun hesaplanması
+cor(sinif_1, sinif_2)
+```

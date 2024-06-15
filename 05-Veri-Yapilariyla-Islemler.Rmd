@@ -1,0 +1,798 @@
+# Veri Yapılarıyla İşlemler
+
+## Vektörlerde İşlemler
+
+Bir vektörün uzunluğunu (kaç elemandan oluştuğunu) öğrenmek için <code>length()</code>; türünü öğrenmek için ise <code>class()</code>, <code>mode()</code> ya da <code>typeof()</code> fonksiyonları kullanılabilir.
+
+```{r}
+# altı elemanlı karakter tipinde bir vektör oluşturma
+meyveler <- c("elma", "çilek", "erik", "armut", "karpuz", "kiraz")
+length(meyveler)
+class(meyveler)
+mode(meyveler)
+typeof(meyveler)
+```
+
+Vektör oluşturulurken kullanılan klasik atama operatörleri haricinde <code>assign()</code> fonksiyonu ile de vektör oluşturulabilir.
+
+```{r}
+assign("yeni_sayilar", c(1, 2, 3, 4, 5))
+yeni_sayilar
+```
+
+Bir vektörden belirli bir eleman seçmek için köşeli parantez <code>[]</code> kullanılır. Vektörden birkaç eleman birlikte de seçilebilir.
+
+```{r}
+meyveler <- c("elma", "çilek", "erik", "armut", "karpuz", "kiraz")
+
+# vektörün içinden yalnızca bir eleman seçme
+meyveler[4]
+
+# vektörün içinden birden fazla eleman seçme
+meyveler[c(3, 4)]
+meyveler[c(2:5)]
+```
+
+Vektörün bir elemanı değiştirilmek istendiğinde de yine köşeli parantez ile eleman ifade edilir ve yeni değer atanır.
+
+```{r}
+meyveler <- c("elma", "çilek", "erik", "armut", "karpuz", "kiraz")
+meyveler[4] <- "muz"
+meyveler
+```
+
+Bir vektördeki bazı elemanlar <code>-</code> operatörü ile işlemler dışında tutulabilir.
+
+```{r}
+meyveler <- c("elma", "çilek", "erik", "armut", "karpuz", "kiraz")
+meyveler[-3]
+meyveler[-c(3, 5)]
+meyveler[-c(1:4)]
+```
+
+Vektörlere eleman ekleme işlemi <code><-</code> atama operatörü yardımı ile yapılabilir.
+
+```{r}
+meyveler <- c("elma", "çilek", "erik", "armut", "karpuz", "kiraz")
+meyveler[7] <- "kivi"
+meyveler
+```
+
+Vektörlerdeki elemanlara isim atanabilir.
+
+```{r}
+meyveler <- c("elma", "çilek", "erik", "armut", "karpuz", "kiraz")
+harf <- LETTERS[1:6]
+names(meyveler) <- harf
+meyveler
+```
+
+İsim ataması yapılan nesneler isimleri ile çağırılabilir.
+
+```{r}
+meyveler[3]
+meyveler["C"]
+```
+
+Bir vektördeki elemanlar belirlenen bir koşula göre de seçilebilir.
+
+```{r}
+notlar <- c(70, 75, 65, 60, 35, 80, 80, 85, 90, 95, 80, 75, 60, 55)
+ogrenciler <- c("Ogr01", "Ogr02", "Ogr03", "Ogr04", "Ogr05", "Ogr06", "Ogr07", "Ogr08", 
+                "Ogr09", "Ogr10", "Ogr11", "Ogr12", "Ogr13", "Ogr14")
+names(notlar) <- ogrenciler
+notlar
+
+# notu 70'ten düşük olan öğrencilerin listelenmesi (mantıksal değerler verir)
+notlar < 70
+# notu 70'ten düşük olan öğrencilerin listelenerek bir nesneye atanması
+telafiOgrenci <- notlar[notlar < 70]
+telafiOgrenci
+# notu ortalamadan yüksek olan öğrencilerin listelenerek bir nesneye atanması
+ortalamadanYuksekOgrenci <- notlar[notlar > mean(notlar)]
+ortalamadanYuksekOgrenci
+# notu tam olarak 80'e eşit olan öğrenciler kimlerdir? (Vektörün hangi elemanlarıdır?)
+which(notlar == 80)
+```
+
+R'da vektörler ile çalışılırken temel fonksiyonlardan yararlanılarak kolayca işlemler yapılabilir.
+
+```{r}
+boy <- c(175, 173, 170, 175, 188, 202, 168, 165, 155, 151, 168, 180, 170)
+# boy uzunluklarının toplanması
+sum(boy)
+# boy uzunluklarının çarpılması
+prod(boy)
+# boy uzunluklarının küçükten büyüğe sıralanması (Olağan argüman decreasing = F)
+sort(boy)
+sort(boy, decreasing = F)
+# boy uzunluklarının büyükten küçüğe sıralanması
+sort(boy, decreasing = T)
+# boy uzunluklarının sırasının tersine çevrilmesi
+rev(boy)
+# ortalama, ortanca, minimum değer, maksimum değer, ranj, standart sapma bulma
+mean(boy); median(boy); min(boy); max(boy); range(boy); sd(boy)
+# en büyük ve en küçük değerinin kaçıncı değerler olduğunu bulma
+which.max(boy); which.min(boy)
+# özet betimsel istatistiklere ulaşma
+summary(boy)
+```
+
+Vektör oluşturmanın çeşitli yolları vardır.
+
+```{r}
+# c() fonksiyonu ile vektör oluşturma
+boy <- c(175, 173, 170, 175, 188, 202, 168, 165, 155, 151, 168, 180, 170)
+boy
+# : işaretini kullanarak vektör oluşturma
+rakamlar <- 0:9
+rakamlar
+# assign() fonksiyonu ile vektör oluşturma
+assign("boy", c(175, 173, 170, 175, 188, 202, 168, 165, 155, 151, 168, 180, 170))
+# 1'den 15'e kadar birer birer artan sayılar ile dizi oluşturulması
+seq(from = 1, to = 15, by = 1)
+seq(1, 15, 1)
+# length argümanı ile belirli uzunlukta dizi oluşturma
+seq(from = 10, length = 16)
+# by argümanı ile artış miktarının ayarlanması
+seq(from = 5, to = 15, by = 2.5)
+# length.out argümanı ile belirli bir aralıkta kaç adet değer bulunacağının ayarlanması
+seq(from = 3, to = 7, length.out = 15)
+# belirli sayıdaki elemandan oluşan bir vektörün rep() fonksiyonu ile tekrar ettirilmesi
+rep(c(0:9), 2)
+rep(c(0:9), times = 2)
+# belirli sayıdaki elemandan oluşan bir vektörün rep() fonksiyonu ile sırayla tekrar ettirilmesi
+rep(c(0:9), each = 2, times = 2)
+# bir vektörün elemanlarının sırayla istendiği kadar tekrar ettirilmesi
+rep(c(1:5), c(1, 2, 3, 4, 5))
+```
+
+Vektörlerde aritmetik işlemler yapılabilir.
+
+```{r}
+vektor1 <- c(2, 3, 5, 7, 11, 13, 17, 23)
+vektor2 <- c(2, 4, 6, 8, 10, 12, 14, 16)
+
+vektor1 + vektor2
+vektor2 - vektor1
+vektor1*vektor2
+vektor2/vektor1
+vektor1^vektor2
+sqrt(vektor1)
+sqrt((vektor1*2)^3) - vektor2
+
+# eleman sayıları eşit olmayan iki vektörün çarpımını inceleyeniz.
+
+vektor3 <- c(1, 2, 3, 4)
+vektor4 <- c(5, 6)
+vektor3*vektor4
+
+vektor5 <- c(1, 2, 3)
+vektor6 <- c(4, 5)
+vektor5*vektor6
+```
+
+`vektor3` ve `vektor4`'ün sorunsuz çarpılmış olmasının nedeni, `vektor4`'ün eleman sayısının `vektor3`'ün eleman sayısının tam katı olmasıdır. `vektor5` ile `vektor6` da çarpılabilmiştir, ancak yazılım uyarı vermiştir.
+
+## Faktörlerde İşlemler
+
+Faktörler, kategorik veriler (örneğin cinsiyet, doğum yeri, kan grupları gibi) için kullanılmaktadır. Faktör nesnelerinin aldığı değerlere düzey (level) denmektedir. Faktörler, karakterler ile karıştırılabilir. Ancak ikisi farklıdır. Faktör nesneleri sıklıkla kategorik verilerin analizinde kullanılmaktadır.
+
+```{r}
+cinsiyet <- c("K", "K", "K", "E", "E", "K", "E", "K", "E")
+class(cinsiyet)
+cinsiyet <- factor(cinsiyet)
+cinsiyet
+class(cinsiyet)
+
+cinsiyet2 <- c(0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1)
+class(cinsiyet2)
+cinsiyet2 <- factor(cinsiyet2)
+cinsiyet2
+class(cinsiyet2)
+```
+
+Faktör düzeyleri sıralanmak istendiğinde <code>ordered()</code> fonksiyonundan faydalanılır.
+
+```{r}
+finalNotlari <- c("AA", "BB", "BA", "AA", "CC", "CC", "BA", "BB", "CB", "AA", "BA", "BB")
+finalNotlari <- factor(finalNotlari)
+finalNotlari
+finalNotlari <- ordered(finalNotlari, levels = c("CC", "CB", "BB", "BA", "AA"))
+finalNotlari
+```
+
+## Matrislerde İşlemler
+
+Vektörler tek boyutlu veri yapıları iken, matrisler ve veri setleri iki boyutludur. Matrisler, vektörler gibi yalnızca tek tür veri içerebilirler. R'da matris oluşturmanın birden fazla yolu vardır. Örneğin uzunlukları aynı olan vektörler birleştirilerek matris elde edilebilir. Sütunların birleştirilmesi için <code>cbind()</code>, satırların birleştirilmesi için ise <code>rbind()</code> fonksiyonları kullanılır. 
+
+```{r}
+motivasyon_puani <- c(90, 80, 80, 80, 70, 40, 70, 50, 90, 80)
+maas <- c(40000, 40000, 30000, 35000, 20000, 12000, 18000, 25000, 50000, 30000)
+
+# sütun ekleme
+matris1 <- cbind(motivasyon_puani, maas)
+matris1
+class(matris1)
+
+# satır ekleme
+matris2 <- rbind(motivasyon_puani, maas)
+matris2
+class(matris2)
+```
+
+Oluşturulması istenen bir matrisin boyutları yazılıma verilerek kolaylıkla matris oluşturulabilir. Bunun için <code>matrix()</code> fonksiyonu kullanılır.
+
+```{r}
+matris3 <- matrix(1:30, nrow = 5, ncol = 6, byrow = FALSE)
+matris3
+matris4 <- matrix(1:30, nrow = 5, ncol = 6)
+matris4
+matris5 <- matrix(1:30, nrow = 5, ncol = 6, byrow = TRUE)
+matris5
+
+# matrislerin birebir aynı olup olmadığını test etme
+identical(matris3, matris4)
+identical(matris4, matris5)
+
+# Ayrıca aşağıdaki matrisleri inceleyiniz.
+matris6 <- matrix(1:30, 5)
+matris6
+matris7 <- matrix(1:30, 5, 6)
+matris7
+matris8 <- matrix(1:30, ncol = 6)
+matris8
+```
+
+Matrislere <code>cbind()</code> ve <code>rbind()</code> fonksiyonları ile eleman eklenebilir.
+
+```{r}
+matris8 <- matrix(1:30, ncol = 6)
+matris8
+
+# sütun ekleme
+matris9 <- cbind(matris8, 100:104)
+matris9
+
+# satır ekleme
+matris10 <- rbind(matris8, 100:105)
+matris10
+```
+
+Bir matrisin satır ve sütun sayılarını görüntülemek için <code>dim()</code> fonksiyonundan yararlanılabilir.
+
+```{r}
+dim(matris7)
+```
+
+`colnames()` ve `rownames()` fonksiyonları ile matrisin sütunlarına ve satırlarına isim verilebilir.
+
+```{r}
+# sütun ve satırlara isim verme
+colnames(matris7) <- c("B1", "B2", "B3", "B4", "B5", "B6")
+matris7
+rownames(matris7) <- c("A1", "A2", "A3", "A4", "A5")
+matris7
+
+# sütun ve satırlara isim verme (paste() fonksiyonundan yararlanarak)
+colnames(matris8) <- paste("A", c(1:6), sep = "")
+matris8
+rownames(matris8) <- paste("B", c(1:5), sep = "")
+matris8
+```
+
+Bir matristen eleman seçme işlemi <code>[]</code> operatörünün içine önce satır, sonra sütun numarası yazılarak yapılmaktadır. Satır ve sütun numarasının arasında virgül (<code>,</code>) bulunmalıdır. Bunun haricinde bir matrisin yalnızca satırlarındaki ya da sütunlarındaki elemanlar da seçilebilir.
+
+```{r}
+# matris7'yi örnek olarak ele alalım
+matris7
+
+# matris7'den farklı şekillerde eleman seçme
+matris7[1, 3]
+matris7[2, ]
+matris7[, 3]
+matris7[, "B3"]
+
+# iki vektörün aynı olup olmadığını test etme
+identical(matris7[, 3], matris7[, "B3"])
+
+# matris7'den farklı şekillerde eleman seçme
+matris7[1:4, 2]
+matris7[c(1, 5), 2]
+matris7[3, c(1, 2, 4)]
+matris7[-c(1, 4), 4]
+matris7[-c(1), ]
+matris7[-1, ]
+matris7[matris7[, 1] > 2, 2]
+```
+
+Matrislerde aritmetik işlemler yapılabilir.
+
+```{r, error = T}
+# matrisi inceleyelim
+matris7
+
+# matrise 5 eklenmesi
+matris7 + 5
+
+# 1'den bir matrisin çıkarılması
+1 - matris7
+
+# matrisin bir sabit ile çarpılması
+3*matris7
+
+# matrisin karekökünün alınması
+sqrt(matris7)
+
+# bir matris, bir vektör ile çarpılabilir
+vektorA <- 1:6
+matris7*vektorA
+
+# lineer cebir için matrislerin oluşturulması
+m1 <- matrix(1:15, 3, 5)
+m2 <- matrix(20:39, 5, 4)
+
+# matrislerin çarpılması
+m1 %*% m2
+
+# matrisin devriğinin alınması
+t(m1)
+
+# matris ile devriğinin çarpılması
+m1 %*% t(m1)
+```
+
+Matrislerin satırları ya da sütunları hızlıca toplanabilir, ortalamaları alınabilir.
+
+```{r}
+# m1 matrisinin oluşturulması
+m1 <- matrix(1:15, 3, 5)
+
+# sütun toplamları
+colSums(m1)
+
+# satır toplamları
+rowSums
+
+# sütun ortalamaları
+colMeans(m1)
+
+# satır ortalamaları
+rowMeans(m1)
+```
+
+## Dizilerde İşlemler
+
+Diziler (arrays), vektörlerin ve matrislerin genelleştirilmiş halidir. Tek tür veri içerebilirler. Dizi oluşturmada <code>array()</code> fonksiyonundan yararlanılır.
+
+```{r}
+# bir dizinin oluşturulması
+dizi1 <- array(rnorm(60, mean = 50, sd = 2), c(3, 4, 5))
+dizi1
+```
+
+Diziler içindeki satırlara ve sütunlara isim verilebilir.
+
+```{r}
+# bir dizinin oluşturulması satır ve sütun isimleriyle oluşturulması
+sütunAdlari <- c("C1", "C2", "C3", "C4")
+satirAdlari <- c("S1", "S2", "S3")
+matrisAdlari <- c("Matris1","Matris2", "Matris3", "Matris4", "Matris5")
+dizi2 <- array(1:60, dim = c(3, 4, 5), 
+               dimnames = list(satirAdlari, sütunAdlari, matrisAdlari))
+dizi2
+```
+
+Diziler içindeki elemanları seçmek için <code>[]</code> kullanılır.
+
+```{r}
+dizi2
+# tüm matrislerin 3. satırlarını seçmek
+dizi2[3,,]
+# yalnızca 2. matrisin 3. satırını seçmek
+dizi2[3,,2]
+# yalnızca 1. matrisin 1. satırının 3. sütunundaki elemanı seçmek
+dizi2[1, 3, 1]
+# 2. matrisi seçmek
+dizi2[,,2]
+```
+
+Dizinin içindeki elemanlara yeni nesneler atanabilir.
+
+```{r}
+# dizi2'nin incelenmesi
+dizi2
+
+# dizi2'ye yeni eleman eklenmesi
+dizi2[,,2] <- matrix(101:112, 3, 4)
+
+# dizi2'nin yeni halinin incelenmesi
+dizi2
+```
+
+## Listelerde İşlemler
+
+Listeler çok esnek bir veri yapısıdır. Listelerde farklı türlerde ve farklı uzunluklarda veri türleri bulunabilir. Listeler <code>list()</code> fonksiyonu yardımıyla oluşturulurlar.
+
+```{r}
+# karakterlerden ve sayılardan oluşan vektörlerin oluşturulması
+personel <- c("Per01", "Per02", "Per03", "Per04", "Per05", "Per06", "Per07", "Per08", 
+              "Per09", "Per10")
+motivasyon_puani <- c(90, 80, 80, 80, 70, 40, 70, 50, 90, 80)
+maas <- c(40000, 40000, 30000, 35000, 20000, 12000, 18000, 25000, 50000, 30000)
+
+# listenin list() fonksiyonu ile oluşturulması
+liste1 <- list(personel, motivasyon_puani, maas)
+liste1
+```
+
+Listenin içindeki verileri ve yapılarını görmek için <code>str()</code> fonksiyonundan yararlanılabilir.
+
+```{r}
+str(liste1)
+```
+
+Listeler içlerinde başka listeler de barındırabilir.
+
+```{r}
+# liste2 nesnesinin oluşturulması için iki ayrı vektörün oluşturulması
+sayilar <- 1:10
+mantik <- c(T, F, F)
+liste2 <- list(sayilar, mantik)
+
+# liste3'e eklenecek olan harfler isimli vektörün oluşturulması
+harfler <- letters[1:20]
+
+# liste3'ün oluşturulması
+liste3 <- list(liste1, liste2, harfler)
+liste3
+```
+
+Liste içindeki elemanlara isim verilebilir.
+
+```{r}
+personel <- c("Per01", "Per02", "Per03", "Per04", "Per05", "Per06", "Per07", "Per08", 
+              "Per09", "Per10")
+motivasyon_puani <- c(90, 80, 80, 80, 70, 40, 70, 50, 90, 80)
+maas <- c(40000, 40000, 30000, 35000, 20000, 12000, 18000, 25000, 50000, 30000)
+liste_yeni <- list(Ad = personel, Motivasyon = motivasyon_puani, Ucret = maas)
+liste_yeni
+```
+
+Listelerden <code>[[]]</code> ve <code>$</code> operatörleri ile eleman seçilebilir.
+
+```{r}
+liste1[[2]]
+liste1[[2]][1]
+liste_yeni$Ad
+liste_yeni$Ad[2]
+liste_yeni$Ad[c(2, 4)]
+liste_yeni$Ad[c(2:4)]
+
+liste_yeni$Ad[2] <- "Per11"
+liste_yeni$Ad
+```
+
+Listenin içindeki elemanlarda düzenlemeler gerçekleştirilebilir.
+
+```{r}
+liste_yeni$Ad[2] <- "Per11"
+liste_yeni$Ad
+
+personel <- c("Per01", "Per02", "Per03", "Per04", "Per05", "Per06", "Per07", "Per08", 
+              "Per09", "Per10")
+cinsiyet <- c("K", "E", "E", "E", "K", "K", "E", "E", "E", "K")
+listeA <- list(personel, cinsiyet)
+listeA
+
+cinsiyet2 <- c("E", "E", "E", "E", "K", "K", "E", "E", "E", "K")
+listeA[[2]] <- cinsiyet2
+listeA
+```
+
+## Data Frame'lerde İşlemler
+
+Data frame sıklıkla karşılaşılan bir veri yapısıdır. Matrislere çok benzemekle birlikte, matrislerden farklı olarak data frame'lerde farklı sütunlarda farklı veri türleri yer alabilir.
+
+```{r}
+matrisK <- matrix(1:12, 2, 6)
+class(matrisK)
+
+yenidata <- rbind(matrisK, c("elma", "çilek", "erik", "armut", "karpuz", "kiraz"))
+yenidata
+str(yenidata)
+```
+
+Data frame'ler <code>data.frame()</code> fonksiyonu ile oluşturulabilir.
+
+```{r}
+id <- 1:14
+notlar <- c(70, 75, 65, 60, 35, 80, 80, 85, 90, 95, 80, 75, 60, 55)
+ogrenciler <- c("Ogr01", "Ogr02", "Ogr03", "Ogr04", "Ogr05", "Ogr06", "Ogr07", "Ogr08", 
+                "Ogr09", "Ogr10", "Ogr11", "Ogr12", "Ogr13", "Ogr14")
+
+data1 <- data.frame(id, notlar, ogrenciler)
+data1
+class(data1)
+```
+
+Farklı uzunluklardaki vektörler ile veri setleri oluşturulabilir. Ancak bu noktada uzun vektörün uzunluğunun diğer (kısa) vektörün uzunluğunun tam katı olması gerekir. Aksi halde hata mesajı alınacaktır. 
+
+```{r, error = TRUE}
+x <- 100:103
+y <- 10
+M <- c(10, 11)
+N <- c(4, 5, 6)
+
+data.frame(x, y)
+data.frame(x, N)
+data.frame(M, N)
+```
+
+Oluşturulan veri setleri <code>edit()</code> fonksiyonu yardımıyla elle düzenlenebilir.
+
+```{r}
+id <- 1:14
+notlar <- c(70, 75, 65, 60, 35, 80, 80, 85, 90, 95, 80, 75, 60, 55)
+ogrenciler <- c("Ogr01", "Ogr02", "Ogr03", "Ogr04", "Ogr05", "Ogr06", "Ogr07", "Ogr08", 
+                "Ogr09", "Ogr10", "Ogr11", "Ogr12", "Ogr13", "Ogr14")
+
+data1 <- data.frame(id, notlar, ogrenciler)
+```
+
+Yukarıdaki kodlar çalıştırıldıktan sonra `edit(data1)` komutu çalıştırıldığında bir veri düzenleme penceresi açılacaktır.
+
+Bir data frame'den eleman seçme işlemi <code>[]</code> operatörünün içine önce satır, sonra sütun numarası yazılarak yapılmaktadır (Değişken adını girerek de eleman seçimi yapılabilir). Satır ve sütun numarasının arasında virgül (<code>,</code>) bulunmalıdır. Bunun haricinde bir data frame'in yalnızca satırlarındaki ya da sütunlarındaki elemanlar da seçilebilir. Bu işlem matrislerdekinin aynısıdır.
+
+```{r}
+id <- 1:14
+notlar <- c(70, 75, 65, 60, 35, 80, 80, 85, 90, 95, 80, 75, 60, 55)
+ogrenciler <- c("Ogr01", "Ogr02", "Ogr03", "Ogr04", "Ogr05", "Ogr06", "Ogr07", "Ogr08", 
+                "Ogr09", "Ogr10", "Ogr11", "Ogr12", "Ogr13", "Ogr14")
+
+data1 <- data.frame(id, notlar, ogrenciler)
+
+data1[1, 3]
+data1[2, ]
+data1[, 3]
+```
+
+Veri setlerinde satır elemanlarının seçimi ile sütun elemanlarının seçimi benzer şekilde yapılmasına karşın, elde edilen nesnelerin türleri farklılık göstermektedir.
+
+```{r}
+is.data.frame(data1[2, ])
+is.data.frame(data1[, 3])
+
+data1[, 3, drop = FALSE]
+is.data.frame(data1[, 3, drop = FALSE])
+```
+
+Data frame'den eleman seçimi gerçekleştirilirken mantıksal operatörler de kullanılabilir.
+
+```{r}
+# notu 75'ten yüksek olan öğrencilerin seçilmesi
+data1[data1[2] > 75, ]
+# notu 75'ten yüksek olan ve adı Eren olan öğrencilerin seçilmesi
+data1[data1[2] > 75 & data1[3] == "Ogr06", ]
+```
+
+Köşeli parantez kullanmadan <code>subset()</code> fonksiyonu yardımıyla da veri setlerinden eleman seçimi yapılabilir.
+
+```{r}
+subset(data1, ogrenciler == "Ogr06")
+subset(data1, notlar > 75)
+```
+
+Veri setlerine yeni elemanlar eklenebilir.
+
+```{r}
+# $ sembolünü kullanarak atama yapmak
+data1$gpa <- c(3.0, 3.3, 3.2, 4.0, 2.8, 3.3, 3.5, 3.4, 3.5, 3.1, 3.2, 2.9, 3.8, 3.3)
+
+# [[]] kullanarak atama yapmak
+data1[["gpa2"]] <- c(3.0, 3.3, 3.2, 4.0, 2.8, 3.3, 3.5, 3.4, 3.5, 3.1, 3.2, 2.9, 3.8, 3.3)
+
+# cbind() fonksiyonu ile atama yapmak
+yilsonu <- c(3.0, 3.3, 3.2, 4.0, 2.8, 3.3, 3.5, 3.4, 3.5, 3.1, 3.2, 2.9, 3.8, 3.3)
+data1 <- cbind(data1, gpa3 = yilsonu)
+
+data1
+```
+
+Veri setlerinin yapısı <code>str()</code> fonksiyonu ile incelenebilir.
+
+```{r}
+str(data1)
+```
+
+<code>names()</code> ya da <code>colnames()</code> fonksiyonları ile bir data frame'deki değişkenlere isim verilebilir.
+
+```{r}
+data1
+names(data1) <- c("No", "Sınav Notu", "Ad Soyad", "GPA1", "GPA2", "GPA3")
+data1
+colnames(data1) <- c("Numara", "Not", "İsim", "GPA1", "GPA2", "GPA3")
+data1
+```
+
+R'da hazır veri setleri ile çalışma
+
+```{r}
+data(iris)
+str(iris)
+head(iris)
+tail(iris)
+dim(iris)
+attributes(iris)
+summary(iris)
+table(is.na(iris))
+```
+
+```{r}
+subset(iris, Sepal.Width < 2.7)
+subset(iris, Sepal.Width < 3 & Petal.Length > 4.5)
+subset(iris, Sepal.Width < 3 | Petal.Length > 4.5)
+as.character(iris$Species)
+iris$new <- iris$Sepal.Length * iris$Petal.Length^2 - 1
+head(iris, 10)
+```
+
+```{r}
+data(mtcars)
+str(mtcars)
+head(mtcars)
+tail(mtcars)
+dim(mtcars)
+attributes(mtcars)
+summary(mtcars)
+table(is.na(mtcars))
+```
+
+Veri yapıları birbirine dönüştürülebilir.
+
+Bazen veri yapılarının birbirine dönüştürülmesi gerekebilir. Örneğin, bilgisayardaki bir Excel dosyası R'a okutturulduğunda genellikle bir data frame elde edilir. Ancak bu data frame aslında yalnızca sayısal karakterler içeren bir matristir ve matrislerde aritmetik işlemler gerçekleştirilmesi gerekiyordur. Bu nedenle data frame'in öncelikle matrise çevrilmesi gerekir. Bunun için <code>as.matrix()</code> fonksiyonu kullanılır.
+
+```{r}
+vektorK <- c(1, 2, 3, 4)
+vektorL <- 10:13
+vektorM <- seq(from = 100, to = 200, length.out = 4)
+dataKLM <- data.frame(vektorK, vektorL, vektorM)
+dataKLM
+class(dataKLM)
+yeniKLM <- as.matrix(dataKLM)
+class(yeniKLM)
+```
+
+Bir data frame <code>as.list()</code> fonksiyonu ile listeye dönüştürülebilir.
+
+```{r}
+vektorK <- c(1, 2, 3, 4)
+vektorL <- 10:13
+vektorM <- seq(from = 100, to = 200, length.out = 4)
+dataKLM <- data.frame(vektorK, vektorL, vektorM)
+dataKLM
+class(dataKLM)
+yeniKLM <- as.list(dataKLM)
+class(yeniKLM)
+```
+
+Bir matris <code>as.vector()</code> fonksiyonu ile vektöre dönüştürülebilir.
+
+```{r}
+MM1 <- matrix(101:112, 3, 4)
+MM1
+MM2 <- as.vector(MM1)
+MM2
+class(MM2)
+```
+
+Vektörler, matrisler ve listeler <code>as.data.frame()</code> fonksiyonu ile data frame'e dönüştürülebilir.
+
+```{r}
+# vektörün data frame'e dönüştürülmesi
+notlar <- c("AA", "BA", "BB", "CB", "CC")
+class(notlar)
+notlar2 <- as.data.frame(notlar)
+class(notlar2)
+
+# matrisin data frame'e dönüştürülmesi
+MM1 <- matrix(101:112, 3, 4)
+class(MM1)
+MM3 <- as.data.frame(MM1)
+class(MM3)
+
+# listenin data frame'e dönüştürülmesi
+personel <- c("Per01", "Per02", "Per03", "Per04", "Per05", "Per06", "Per07", "Per08", 
+              "Per09", "Per10")
+motivasyon_puani <- c(90, 80, 80, 80, 70, 40, 70, 50, 90, 80)
+maas <- c(40000, 40000, 30000, 35000, 20000, 12000, 18000, 25000, 50000, 30000)
+liste_yeni <- list(Ad = personel, Motivasyon = motivasyon_puani, Ucret = maas)
+class(liste_yeni)
+liste_yeni2 <- as.data.frame(liste_yeni)
+class(liste_yeni2)
+```
+
+## Alıştırmalar `r fontawesome::fa('pencil',fill='gray')`
+
+**Alıştırma 1**
+`ABCDE <- c("A", "B", "C", "D")` komutunu çalıştırarak `ABCDE` nesnesini oluşturunuz. Ardından bu vektöre beşinci eleman olarak "E" harfini ekleyiniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+ABCDE <- c("A", "B", "C", "D")
+ABCDE[5] <- "E"
+ABCDE
+```
+
+</details>
+
+**Alıştırma 2**
+Beş farklı sayısal değerden oluşan bir vektör oluşturunuz. Ardından bu vektördeki değerleri büyükten küçüğe doğru sıralayan bir fonksiyon yardımıyla sıralı değerlerden oluşan yeni bir vektör elde ediniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+maas1 <- c(17500, 82000, 55000, 22500, 32500)
+maas2 <- sort(maas1, decreasing = T)
+```
+
+</details>
+
+**Alıştırma 3**
+5 satırlı 6 sütunlu `matris_yeni` isimli bir matris oluşturunuz. Bu matrisin üçüncü satırındaki değerler haricindeki değerlerden oluşan halini yazdırınız.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+matris_yeni <- matrix(1:30, 5, 6)
+matris_yeni[-3, ]
+```
+
+</details>
+
+**Alıştırma 4**
+Dört elemanlı bir karakter vektörü, bir de nümerik vektör oluşturunuz. Bu iki vektörden oluşan bir data frame oluşturunuz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+dortHarf <- c("M", "T", "H", "N")
+dortSayi <- c(1, 2, 0, 6)
+dortHarfSayi <- data.frame(dortHarf, dortSayi)
+dortHarfSayi
+```
+
+</details>
+
+**Alıştırma 5**
+`data(iris)` komutunu çalıştırdıktan sonra `iris` veri setindeki türü (Species) "setosa" olan çiçeklerin `Petal.Length` değerlerinin aritmetik ortalamasını bulunuz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+data(iris)
+iris_setosa <- subset(iris, Species == "setosa")
+mean(iris_setosa$Petal.Length)
+```
+
+</details>
+
+**Alıştırma 6**
+`matris_alistirma <- matrix(91:102, 3, 4)` komutunu çalıştırarak bir matris oluşturunuz. Ardından bu matrisi data frame'e dönüştürünüz. Nesnenin data frame'e dönüşüp dönüşmediğini kontrol ediniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+matris_alistirma <- matrix(91:102, 3, 4)
+matris_alistirma <- as.data.frame(matris_alistirma)
+is.data.frame(matris_alistirma)
+```
+
+</details>

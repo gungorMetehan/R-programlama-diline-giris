@@ -1,0 +1,59 @@
+# Giriş
+
+R’da işlemler gerçekleştirmeye başlamadan önce şunları akılda tutmakta yararlı olacaktır:
+<li>R, harflerin büyüklüğüne küçüklüğüne duyarlıdır. Yani bir nesnenin adı ‘M’, diğer nesnenin adı ‘m’ ise R, bu iki nesneyi farklı şekilde kaydetmiş olacaktır. Benzer şekilde, bu harfler özel bir fonksiyonun içinde yer alıyorsa, fonksiyonların isimleri aynı olsa bile iki fonksiyon ayrı iki işlemi gerçekleştiriyor olacaktır.</li>
+<li><code>#</code> sembolünün bulunduğu satırdaki sembolün sağında kalan kodlar R tarafından çalıştırılmaz. Bu sembol, genellikle yorum, hatırlatıcı eklemek için kullanılır.</li>
+<li>Satır komutları, yeni satırlar oluşturarak birbirinden ayrılır. Bunun yanı sıra iki komutun arasına <code>;</code> sembolü konularak da aynı satırda birden fazla komut çalıştırılabilir. Ancak genellikle, daha okunabilir satır komutları için komutlar farklı satırlara yazılmaktadır.</li>
+<li>Bir satır komutunu henüz tamamlamadan çalıştırdığınızda konsolda (console) <code>+</code> işareti belirir. Bu işaret, komutun noksan olduğu anlamına gelir. Bununla genelde bir fonksiyonun son kapatma parantezinin ‘<code>)</code>’ kullanılmadığı durumlarda karşılaşılır.</li>
+<li>R, satırdaki komutlarda fazladan konulan boşluklara duyarlı değildir. Yalnızca bir kodun yazımında hatalı bir boşluk bırakıldığında bu fazlalık boşluk sıkıntı yaratabilir. Örneğin, <code>1 + 2</code> ile <code>1&nbsp; + &nbsp;&nbsp;&nbsp;&nbsp;2</code> işlemleri aynı sonucu verecektir. <code>c(1,2,3)</code> komutunun çalıştırılması ile <code>c(1,&nbsp;&nbsp;2,&nbsp;&nbsp;&nbsp;&nbsp;3)</code> komutunun çalıştırılması aynı sonucu verecektir. Buna karşın atama operatörü <code><&nbsp;&nbsp;-</code> şeklinde kullanılamaz. Bu durumda R bunu <code><</code> (küçüktür) işareti ve <code>-</code> (eksi) işareti olarak anlayacaktır.</li>
+<li>R’da aynı işlem birden fazla şekilde gerçekleştirilebilir. Örneğin 1’den 10’a kadar olan tam sayılardan oluşan bir vektör oluşturmak istediğinizde, bu işlemin pek çok yolu olabilir.</li>
+<li>R’da bir nesne ismi sayı ile başlamamalıdır. Nesneler adlandırılırken adlandırmaya harflerle başlanmalı, istenirse sonra rakam, nokta (<code>.</code>) ya da alt çizgi (<code>_</code>) kullanılabilir. Tek bir harften oluşan nesneler oluşturulabilse de, nesnelere <code>F</code> ve <code>T</code> harfleri verilmemelidir. Bunun nedeni, F harfinin <code>FALSE</code>, T harfinin ise <code>TRUE</code> anlamında algılanmasıdır. Bunlar haricindeki bazı harfler de, tek harften oluşan bazı fonksiyonlara (örneğin, c(), q() gibi) çok benzeyeceği için, genel olarak tek harften oluşan harfler ile nesnelerin isimlendirilmesinden kaçınılmalıdır.</li>
+R, bir hesap makinesi olarak kullanılabilir. Örneğin konsola 1 + 2 işlemi yazıldıktan sonra ‘Enter’ tuşuna basıldığında 3 yanıtı alınacaktır. Kısacası dört işlem +, -, *, / sembollerinin yardımı ile yapılmaktadır. Bu işlemlerin daha sonra kullanılması planlanıyorsa işlemler kaynak (source) panelinde gerçekleştirilerek nesnelere atanabilir.
+R’da işlemler gerçekleştirebilmek için belki de ilk olarak öğrenilmesi gereken bir nesnenin nasıl oluşturulacağıdır. Bunun için sıklıkla <code><-</code> atama operatörü kullanılmaktadır. Örneğin, kaynak (source) ekranına <code>x <- c(12, 91, 6, 19)</code> yazılarak çalıştırıldığında <code>x</code> isimli bir nesne oluşacaktır. Bu nesne, basit bir nümerik vektördür ve dört tane elemandan oluşur. Bu elemanlar 12, 91, 6 ve 19’dur.
+
+```{r}
+x <- c(12, 91, 6, 19)
+x
+```
+
+Veri atayarak bir nesne oluşturma <code>=</code> işareti ile de yapılabilir.
+
+```{r}
+x = c(12, 91, 6, 19)
+x
+```
+
+Ancak <code>=</code> işaretinin özellikle fonksiyonlar içinde kullanımı daha yaygın olduğu için bu kitap boyunca <code><-</code> işareti ile atamalar gerçekleştirilmiştir. Ayrıca atanacak veri ile nesne ismi değiştirilerek de veri ataması yapılabilir.
+
+```{r}
+c(12, 91, 6, 19) -> x
+x
+```
+
+R’da atama operatörü kullanılmadan, fonksiyonlar aracılığı ile de veri oluşturulabilir. Örneğin,
+
+```{r}
+assign("x", c(12, 91, 6, 19))
+x
+```
+
+Burada örneklenen dört farklı satır komutunda da aynı işlem gerçekleştirilmektedir. Örneklerin ilk satırlarında <code>x</code> isimli bir nesne oluşturulmaktadır ve bu nesne çalışma alanına (environment) kaydedilmektedir. Daha sonra istendiğinde kaydedilen bu <code>x</code> nesnesi çağırılabilir ve üzerinde işlemler yapılabilir. Örneğin,
+<code>x*10</code> komutu çalışma ekranına yazılıp çalıştırılırsa <code>x</code> vektöründeki her bir eleman 10 değeri ile çarpılır. Bu halde yeni bir vektör (nesne) elde edilmiş olur. Dilersek, bu yeni nesneye bir isim verebiliriz.
+
+```{r}
+y <- x*10
+y
+```
+
+Bu örnekte, <code>y</code> nesnesi artık <code>x</code>’ten bağımsız yeni bir vektör nesnesidir ve R tarafından kaydedilmiştir. İlerleyen zamanda <code>y</code> nesnesi çağrıldığında artık 120, 910, 60 ve 190 sayılarından oluşan bir vektör ekrana gelecektir.
+
+<div class="warning" style='background-color:#D3EEFF; color: #003E64; border-left: solid #003E64 4px; border-right: solid #003E64 4px; border-radius: 4px; padding:0.7em;'>
+<span>
+<p style='margin-top:1em; text-align:center'>
+<center><p>`r fontawesome::fa('circle-info',fill='#003E64', height = '2.5em')`</p></center>
+<b>Nesne İsimlendirme</b></p>
+<p style='margin-left:1em;'>
+Her ne kadar temel bir konu gibi görünse de, programlamada nesne isimlendirme bazen karmaşıklaşabilmektedir. Çok sayıda satırdan oluşan kodlarda hazırlanan çalışmalarda çok sayıda nesneye isim verilmesine gereksinim duyulabilir. Nesnelerin sayısı arttıkça nesnelerin her birine isim vermek karmaşıklaşabilmektedir. Nesnelere hem kodları yazan hem de kodları okuyacak kişiler tarafından kolay bir şekilde takip edilebilecek isimler vermek yerinde olacaktır. Bu noktada iki yaygın anlayış vardır: 'snake case' ve 'camel case'. Snake (yılan) case isimlendirmede nesneler genel olarak 'yeni_veri', 'fonksiyon_a', 'grafik_yeni' gibi isilendirilir. Camel (deve) case isimlendirmede ise nesneler genel olarak 'yeniVeri', 'fonksiyonA', 'grafikYeni' gibi isimlendirilir. Tabi ki istenilen tarz seçilebilir. Genel olarak 'snake_case' hangi harfin büyük hangisinin küçük yazıldığını karıştırmama konusunda avantaj sağladığı için tercih edilmektedir. Bu kitapta da sıklıkla bu anlayış tercih edilmiştir. Ancak, örnek olması açısından az sayıda nesne camel case şeklinde isimlendirilmiştir.
+</p>
+</span>
+</div>

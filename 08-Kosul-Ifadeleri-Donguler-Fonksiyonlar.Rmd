@@ -1,0 +1,628 @@
+# Koşul İfadeleri, Döngüler ve Fonksiyonlar
+
+## Koşul İfadeleri
+
+### if() Koşul İfadesi
+
+<code>if()</code> koşul ifadesi hemen hemen tüm programlama dillerinde mevcuttur ve oldukça önemlidir. Bu bir fonksiyon olarak düşünülebilir ve bu fonksiyonda koşullu bir ifade bir ölçüt ile karşılaştırılarak test edilir ve koşullu ifadenin gerçekleşmesi durumunda (TRUE) elde edilecek çıktı belirlenebilir.
+
+```{r}
+deger <- 175 
+if (deger >= 160) { 
+print("Yeterli") 
+}
+
+if (deger >= 176) { 
+print("Yeterli") 
+}
+```
+
+İlk örnekte 'Yeterli' çıktısı alınırken, ikinci örnekte herhangi bir çıktı bulunmamaktadır. Çünkü `deger` isimli nesnede saklanan değer 176'ya eşit ya da ondan büyük değildir.
+
+### else() Koşul İfadesi
+
+<code>else()</code> koşul ifadesi <code>if()</code> koşuk ifadesindeki koşullar sağlanmadığı durumda ortaya çıkacak alternatifi belirlemek amacıyla kullanılır.
+
+```{r}
+deger <- 175 
+if (deger >= 180) { 
+print("Yeterli") 
+} else { 
+print("Yetersiz") 
+}
+```
+
+### else if() Koşul İfadesi
+
+<code>if()</code> ve <code>else()</code> koşul ifadelerinde bir koşullu önermenin iki farklı alternatifi (TRUE ya da FALSE) üzerinde durulmaktadır. Ancak, olası durum çıktılarının ikiden fazla olması da söz konusu olabilir. Bu durumda <code>else if()</code> koşul ifadesi kullanılabilir.
+
+```{r}
+p1 <- 0.37 
+if(p1 >= 0.80) { 
+  print("Çok Kolay")
+} else if(p1 >= 0.60) { 
+    print("Kolay") 
+} else if(p1 >= 0.40) { 
+    print("Orta") 
+} else if(p1 >= 0.20) { 
+  print("Zor")
+} else if(p1 >= 0.00) { 
+  print("Çok Zor") 
+  }
+```
+
+<code>if()</code> koşul ifadeleri vektörlerde kullanılamaz. Yukarıdaki örneğe benzer şekilde, birden fazla madde (soru) için madde güçlük indeksleri verildiğinde her biri için yorum yapmak istendiğinde <code>ifelse()</code> fonksiyonu kullanılabilir.
+
+### ifelse() Koşul İfadesi
+
+<code>ifelse()</code> koşul ifadesinin genel kullanımı şu şekildedir: ifelse(koşul, doğru ifade, yanlış ifade).
+
+```{r}
+deger <- 173 
+ifelse(deger >= 175, "Yeterli", "Yetersiz")
+
+degerler <- c(173, 170, 181, 189, 190, 191, 180, 171, 163, 166) 
+ifelse(degerler >= 175, "Yeterli", "Yetersiz")
+
+# örneğin ifelse() ile bir veri setindeki 99 değerleri yerine NA girilebilir. 
+yeniveri <- c(2, 2, 2, 1, 1, 99, 1, 2) 
+yeniveri2 <- ifelse(yeniveri == 99, NA, yeniveri) 
+yeniveri2
+```
+
+```{r}
+ornekData <- data.frame(no = c (1:5), 
+                        isim = c("Kaan","Ata","Yamaç","Okan","Serhat"), 
+                        maas = c(12000, 17000, 160000, 21000, 8500)) 
+ornekData2 <- ornekData 
+ornekData2$maas <- ifelse(ornekData$maas >= 50000, "hatali giris", ornekData$maas) 
+ornekData3 <- data.frame(ornekData$no, ornekData$isim, ornekData2$maas) 
+ornekData3
+colnames(ornekData3) <- c("No", "Ad", "Maas") 
+ornekData3
+```
+
+## Döngüler
+
+Döngüler, programlama dillerinde sıklıkla kullanılan akış kontrolü (flow control) mekanizmasının bir parçasıdır. R’da döngüler <code>for()</code>, <code>while()</code> ve <code>repeat()</code> fonksiyonları ile çalıştırılır.
+
+### for Döngüsü
+
+```{r}
+# bir vektör içindeki tüm elemanların karesini alma
+x <- c(1:20) 
+for (i in x) {
+  print(i^2)
+  }
+```
+
+Yukarıdaki örnekte `x` vektörünün her elemanının karesinin alınıp tek tek gösterilmesi (`print()`) istenmiştir. `for()` fonksiyonunun içindeki i indeksi göstermektedir ve i'nin sırasıyla 1'den 20'ye kadar değer alması istenmiştir.
+
+```{r}
+liste <- list(1:6, letters[1:4], c("AA", "BA", "BB", "CB", "CC")) 
+liste
+
+for(i in 1:length(liste)) {
+  liste[[i]] <- rep(liste[[i]], 3)
+  } 
+liste
+```
+
+Yukarıdaki örnekte i'nin sırasıyla 1'den `liste` isimli nesnenin uzunluk değerine kadar değer alması istenmiştir. Döngünün içine yazılan fonksiyon (`rep()`) aracılığı ile `liste`nin i'nci elemanından başlayarak her elemanının - ki üç elemanı (nesnesi) vardır - içindeki elemanların üç kere tekrarlanarak nesnelerin uzatılması istenmiştir. Bu işlemin ardından `liste` isimli nesne değişecektir, ancak ekrana bir sonuç gelmeyecektir. Çünkü istenmemiştir. Ardından komut satırına `liste` yazılarak nesnenin yeni hali görüntülenebilir.
+
+```{r}
+# 6 satırdan 3 sütundan oluşan bir data frame oluşturalım
+yeniVeri <- data.frame(S1 = c(1, 3, 5, 7, 9, 11),
+                       S2 = rep(1:3, 2),
+                       S3 = seq(from = 1, to = 20, length.out = 6))
+
+# Bu data frame'e yeni bir sütun (S4) eklensin ve bu sütunda ilk üç sütundaki değerlerin toplamı gösterilsin
+for (i in 1:6) {
+  yeniVeri$S4[i] <- yeniVeri$S1[i] + yeniVeri$S2[i] + yeniVeri$S3[i]
+  
+}
+yeniVeri
+
+# aynı işlemi yaparken i indeksinin 1 ile 6 arasında dönmesi ile 1 ile nrow(yeniVeri) arasında dönmesi aynı anlama gelmektedir. Çünkü nrow() fonksiyonu içindeki data frame'in satır sayısını vermektedir
+yeniVeri <- data.frame(S1 = c(1, 3, 5, 7, 9, 11),
+                       S2 = rep(1:3, 2),
+                       S3 = seq(from = 1, to = 20, length.out = 6))
+
+for (i in 1:nrow(yeniVeri)) {
+  yeniVeri$S4[i] <- yeniVeri$S1[i] + yeniVeri$S2[i] + yeniVeri$S3[i]
+}
+yeniVeri
+
+# burada for döngüsü örneklendirilmeye çalışılmıştır. Ancak satırdaki değerlerin toplamı için daha basit bir komut R'da mevcuttur: rowSums()
+yeniVeri <- data.frame(S1 = c(1, 3, 5, 7, 9, 11),
+                       S2 = rep(1:3, 2),
+                       S3 = seq(from = 1, to = 20, length.out = 6))
+
+# for döngüsü kullanılmadan satırlardaki ya da sütunlardaki değerleri toplamak mümkündür. Benzer şekilde satırlardaki/sütunlardaki değerlerin çarpımı, ortalamasının, standart sapmasının alınması gibi pek çok işlem için R'da özel fonksiyonlar bulunmaktadır
+yeniVeri$S4 <- rowSums(yeniVeri)
+yeniVeri
+```
+
+Bir başka örnekte <code>ncol()</code> fonksiyonunu kullanalım.
+
+```{r}
+# 9 satırdan 3 sütundan oluşan bir data frame oluşturalım
+# not: seq_len() ve seq.int() fonksiyonlarını ayrı ayrı çalıştırarak nasıl birer vektör oluşturduklarını inceleyiniz.
+yeniVeri2 <- data.frame(S1 = seq_len(9),
+                        S2 = seq.int(-4, 4),
+                        S3 = c(-1, 1, 1, -1, 1, -2, 2, 1, -1)^2)
+yeniVeri2
+
+# j indeksinin 1 ile 6 arasında dönmesi ile 1 ile ncol(yeniVeri2) arasında dönmesi aynı anlama gelmektedir. Çünkü ncol() fonksiyonu içindeki data frame'in sütun sayısını vermektedir
+for (j in 1:ncol(yeniVeri2)) {
+  yeniVeri2[, 3+j] <- yeniVeri2[, j]^2
+}
+
+yeniVeri2
+```
+
+Yukarıdaki for döngüsünün ne yaptığını anlamaya çalışalım. j indeksi (illa i olmak zorunda değil) 1 ile 3 arasında dönecektir. Her seferinde yeniVeri'nin j'nci sütunundaki değerlerin karesini alacak ve bunu (3+j)'nci sütun olarak ekleyecektir. Böylelikle data frame'e 3 yeni sütun eklenecek ve data frame 6 sütunlu olacaktır.
+
+Bir döngüde çeşitli fonksiyonlar kullanılabilir. Örneğin bir başka geliştiricinin hazırladığı bir paketteki fonksiyonu kullanarak bir problemi çözmeye çalışalım. Aşağıdaki örnekte öncelikle 3 farklı test verisi oluşturulmuş (hepsinde 10 maddeye yanıt veren öğrenciler bulunmakta, 1'ler doğru, 0'lar yanlış yanıtı ifade etmekte) ve sonrasında `psychometric` paketi içindeki bir fonksiyondan (`item.exam()`) yararlanılarak eldeki farklı veri setlerindeki maddelerin madde güçlük indeksleri hesaplanmıştır.
+
+```{r}
+# üç farklı test verisinin matris şeklinde oluşturulması
+test_verisi_1 <- matrix(sample(c(1, 0), replace = TRUE, size = 50, prob = c(.40, .60)), 5, 10)
+test_verisi_2 <- matrix(sample(c(1, 0), replace = TRUE, size = 50, prob = c(.50, .50)), 10, 10)
+test_verisi_3 <- matrix(sample(c(1, 0), replace = TRUE, size = 50, prob = c(.50, .50)), 15, 10)
+
+# üç farklı test verisinin bir listeye alınması
+test_verisi <- list(test_verisi_1, test_verisi_2, test_verisi_3)
+```
+
+Örnek uygulama için veri setleri oluşturulmuştur. Farklı bir paketteki fonksiyondan yararlanabilmek için o paket indirilmeli ve kurulmalıdır. Bunun için `install.packages("psychometric")` satır komutu çalıştırıldıktan sonra aşağıdaki komut çalıştırılmalıdır.
+
+```{r warning=FALSE}
+library(psychometric)
+```
+
+Paket çalışır hale geldikten sonra aşağıdaki satır komutları çalıştırılabilir.
+
+```{r}
+# boş bir listenin oluşturulması
+p_ind <- list()
+
+for (i in 1:3) {
+  p_ind[[i]] <- item.exam(test_verisi[[i]])
+  print(p_ind[[i]][4])
+}
+```
+
+Sonuçta üç farklı test verisindeki 10 maddeye ilişkin elde edilen madde güçlük indeksleri arka arkaya listelenecektir. Kullanıcı bu görünümü değiştirmek için döngünün içindeki kodları değiştirebilir ya da oluşan `p_ind` isimli nesne üzerinden düzenlemeler yapabilir. 
+Birden fazla <code>for()</code> döngüsü iç içe kullanılabilir. Bu durumda bu tür döngülere iç içe döngüler (nested loops) denir.
+
+```{r}
+matrisA <- round(matrix(runif(10, min = -2, max = 2), nrow = 5), 2) 
+matrisA
+
+for(i in 1:nrow(matrisA)) {
+  for(j in 1:ncol(matrisA)) {
+    print(paste("Her a için", "i =", i, "ve", "j =", j, "iken", "değer", matrisA[i, j]))
+  }
+  }
+```
+
+### while Döngüsü
+
+<code>for()</code> döngülerinde tekrar sayısı vektörün eleman sayısı kadar iken <code>while()</code> döngülerinde döngü sayısı için bir ifade bulunmaz. <code>while()</code> döngüsü <code>if()</code> durum cümlesinde olduğu gibi verilen bir koşulun yanlış (FALSE) olduğu zamana kadar çalışır.
+
+```{r}
+sifir <- 0 
+while (sifir < 5) {
+  print(sifir) 
+  sifir <- sifir + 1
+  }
+
+while (sifir < 5) {
+  sifir <- sifir + 1
+  print(sifir)
+  }
+```
+
+### repeat Döngüsü
+
+<code>repeat()</code> fonksiyonu ile belirlenen ifade bitirme komutuna kadar tekrar edilir. Bu fonksiyon, döngüyü bitirmeye yarayan <code>break</code> komutu ile birlikte kullanılır.
+
+```{r}
+s <- 0 
+repeat{
+  s <- s + 10
+  print(s)
+  if(s == 100) break
+  }
+```
+
+## Temel Fonksiyon Yazımı 
+
+R’da fonksiyonlar temelde üç temel bileşenden oluşur: başlık, argüman ve gövde. Örnek olarak <code>F_a</code> isimli bir fonksiyon oluşturalım. Bu fonksiyon, kendisine verilen bir değerden 1 sayısını çıkarsın.
+
+```{r}
+F_a <- function(x) {
+  x - 1
+  }
+girdiler <- c(10, 15, 20) 
+ciktilar <- F_a(girdiler) 
+ciktilar
+```
+
+Bir üs alma fonksiyonu yazalım. Bu fonksiyon, kendisine verilen bir değerin üssünü alsın.
+
+```{r}
+usAlma <- function(x, u) {
+  x^u
+  } 
+usAlma(2, 6)
+usAlma(2024, 0)
+```
+
+Bir küpün bir ayrıtının uzunluğu verildiğinde, küpün hacmini, taban alanını ve yüzeylerinin alanlarının toplamını veren bir fonksiyon yazalım.
+
+```{r}
+kupFonk <- function(a) {
+  sonuc <- data.frame(Hacim = a^3, TabanAlani = a^2, AlanlarToplami = 6*a^2)
+  print(sonuc)
+  } 
+kupFonk(4)
+
+# Birden fazla küp için değerlerin elde edilmesi 
+kupFonk2 <- function(a) {
+  sonuc <- data.frame(Kenar = a, Hacim = a^3, TabanAlani = a^2, AlanlarToplami = 6*a^2)
+  print(sonuc)
+  } 
+kupFonk2(c(1, 2, 3, 4, 5))
+```
+
+Kendi yazdığımız fonksiyon içinde, başka geliştiricilerin hazırladığı fonksiyonları da kullanabiliriz. Örneğin;
+
+
+
+## apply() Ailesi
+
+R’da istatistiksel analizler yapılırken matrislerin, listelerin veya veri setlerinin her bir satırına ya da sütununa işlemler uygulanmak istenebilir. Bu durumda döngülerin kullanılması her zaman pratik olmayabilir. <code>apply()</code> ailesine ait fonksiyonlarla da satırlara ve sütunlara işlemler uygulanabilir. Bu ailede <code>apply()</code>, <code>lapply()</code>, <code>sapply()</code>, <code>vapply()</code>, <code>mapply()</code>, <code>rapply()</code> ve <code>tapply()</code> fonksiyonları yer almaktadır. Bunlar arasından sık kullanılan dört tanesini inceleyelim.
+
+### apply() Fonksiyonu
+
+```{r}
+matris_a <- matrix(c(1:100), nrow = 20, ncol = 5) 
+matris_a
+apply(matris_a, 2, mean)
+apply(matris_a, 1, max)
+yenibirfonksiyon <- function(x) {
+  (mean(x)+max(x))*10
+  } 
+apply(matris_a, 2, yenibirfonksiyon)
+apply(matris_a, 2, function(x) {(mean(x)+max(x))*10})
+```
+
+### lapply() Fonksiyonu
+
+<code>lapply()</code> fonksiyonu <code>apply()</code> fonksiyonunun listeler, vektörler ve veri setleri için özelleştirilmiş halidir.
+
+```{r}
+aa <- c(1, 4, 9) 
+bb <- c(16, 25, 36) 
+liste_sayilar <- list(aa, bb) 
+lapply(liste_sayilar, sqrt)
+lapply(liste_sayilar, function(x) {mean(x)^2})
+```
+
+### sapply() Fonksiyonu
+
+<code>sapply()</code> fonksiyonu ile de <code>lapply()</code> fonksiyonunda olduğu gibi liste, veri setleri ve vektörler üzerinde çalışılır. <code>sapply()</code> fonksiyonunun temel amacı çıktıları basitleştirmektir. <code>lapply()</code> ile elde edilen çıktılar liste biçiminde iken, <code>sapply()</code> ile elde edilen çıktılar daha çok vektör ya da vektörlerin özel halleri türündedir.
+
+```{r}
+aa <- c(1, 4, 9) 
+bb <- c(16, 25, 36) 
+liste_sayilar <- list(aa, bb) 
+
+sapp <- sapply(liste_sayilar, sqrt) 
+sapp
+
+rowSums(sapp)
+```
+
+### tapply() Fonksiyonu
+
+<code>tapply()</code> fonksiyonu liste ve data frame türündeki nesnelere uygulandığında sonucu vektör ya da liste şeklinde vermektedir. Eğer <code>tapply()</code> içinde kullanılan fonksiyon tek bir değer veriyorsa çıktı vektör olur, birden fazla değer veriyorsa çıktı liste olacaktır.
+
+```{r}
+ad <- c("oguz","sabahattin","yusuf", "tezer") 
+cinsiyet <- c("E", "E", "E", "K") 
+boy <- c(185, 170, 175, 165) 
+cinsiyet <- factor(cinsiyet) 
+yeniliste <- list(ad = ad, cinsiyet = cinsiyet, boy = boy) 
+# cinsiyete göre boy uzunluklarını küçükten büyüğe sıralanması (cinsiyet faktör idi) 
+tapply(yeniliste$boy, yeniliste$cinsiyet, sort)
+
+# adlara göre boy uzunluklarını küçükten büyüğe sıralanması 
+tapply(yeniliste$boy, yeniliste$ad, sort)
+```
+
+## Bazı Yararlı Fonksiyonlar
+
+R’da herhangi bir paket (package) indirmeden kullanılabilen, çok sayıda fonksiyon bulunmaktadır. Bu fonksiyonların bir kısmı, kitabın önceki bölümlerinde ele alındı. Bunun haricinde, çeşitli amaçlarla kullanılabilecek birkaç fonksiyonu burada listelemek istedim.
+
+### dput() Fonksiyonu
+
+<code>dput()</code> fonksiyonu ile çalışma alanınızda kayıtlı bir veri setini satır komutları haline getirebilirsiniz. Bu özellikle, veri setinizi ya da veri setinizin bir kısmını R’da çalışacak olan biriyle paylaşmak istediğinizde yararlı olabilir.
+
+```{r}
+data(iris)
+iris_ornek <- head(iris, 10)
+iris_ornek
+dput(iris_ornek)
+```
+
+`dput(iris_ornek)` yukarıda `structure()` fonksiyonu içinde verilen fonksiyon, argüman ve diğer bilgileri verecektir. Bunu kopyalayarak başka biri ile paylaşabilirsiniz. Böylelikle, o kişi de sizin verdiğiniz veriyi R'a aktarabilir.
+
+### Yardım Fonksiyonları
+
+<code>help()</code> fonksiyonu, adından anlaşılacağı üzere yardım fonksiyonudur. Bu fonksiyon ya da <code>?</code> ile R'daki fonksiyonlar, veri setleri ve diğer nesneler ile ilgili yardım sayfalarına ulaşılabilir. Örneğin <code>help(difTID, package = "difR")</code> satır komutu çalıştırılarak "difR" paketi içindeki difTID() fonksiyonu ile ilgili bilgilere erişilebilir. Bunun yanı sıra, bir fonksiyon (örneğin lm() fonksiyonu) ile ilgili detaylı bilgilere erişmek isteniyorsa <code>help(lm)</code>, <code>help("lm")</code>, <code>?lm</code> ya da <code>?"lm"</code> satır komutları çalıştırılabilir. Ek olarak <code>apropos()</code> fonksiyonu ile isminin bir kısmı hatırlanan fonksiyonlar ve çalışma alanına kayıtlı nesneler listelenebilir. Bu fonksiyonun içine yazılacak metin tırnak işareti içinde verilmelidir ve fonksiyon büyük-küçük harfe duyarlı değildir.
+
+```{r}
+apropos("mean")
+```
+
+### ls() Fonksiyonu
+
+<code>ls()</code> fonksiyonunu kullanarak çalışma alanınıza kayıtlı tüm nesneleri listeleyebilirsiniz.
+
+### rm() Fonksiyonu
+
+<code>rm()</code> fonksiyonunu kullanarak çalışma alanınızda kayıtlı olan bir nesneyi silebilirsiniz.
+<code>rm(list = ls())</code> komutunu çalıştırarak çalışma alanınızda kayıtlı olan tüm nesneleri silebilirsiniz.
+
+### identical()
+
+`identical()` fonksiyonu kendisine verdiğiniz nesnelerin birebir aynı olup olmadığını test etmede kullanılır. Bu kitapta da kullanılmıştır. Örneğin, iki vektörün aynı olup olmadığını aşağıdaki kodlar ile test edelim.
+
+```{r}
+vektor_1 <- 1:5
+vektor_2 <- seq(5)
+identical(vektor_1, vektor_2)
+```
+
+Çıktının `TRUE` olması, verilen iki nesnenin (vektör) birebir aynı olduğu anlamına gelir. Eğer bu vektörlerin herhangi bir elemanı farklı olsaydı, sonuç `FALSE` olarak dönecekti. Bir başka örnek olarak aşağıdaki iki matrisin aynı olup olmadığını test edelim:
+
+```{r}
+matris_1 <- diag(1, 3, 3)
+matris_2 <- matrix(c(1, 0, 0, 0, 1, 0, 0, 0, 1), 3, 3)
+identical(matris_1, matris_2)
+```
+
+### solve()
+
+`solve()` fonksiyonu yardımıyla cebirsel eşitlikler çözümlenebilir. Bu fonksiyon yardımıyla denklem sistemleri de çözülebilmektedir. Örneğin, $5x=20$ eşitliğinde $x$'in kaç olduğu şu şekilde çözülebilmektedir:
+
+```{r}
+solve(5, 20)
+```
+
+Dahası, iki denklemden oluşan bir denklem sisteminin çözümünde matrislerden yararlanılabilir. Diyelim ki,
+$$4x+y=13$$
+$$3x-2y=7$$
+denklem sistemi verilsin. Buna göre $x$ ve $y$ kaçtır?
+
+```{r}
+# öncelikle denklemlerin çözümü için gerekli matrisleri oluşturalım, bu matrisler katsayılardan oluşacaktır.
+M1 <- matrix(c(4, 3, 1, -2), nrow = 2)
+M2 <- matrix(c(13, 7), nrow = 2)
+
+# sonucu isteyelim.
+solve(M1, M2)
+```
+
+### D()
+
+<code>D()</code> fonksiyonu ile bir fonksiyonun türevi alınabilir. Örneğin, $y = x^2+x-1$ fonksiyonunun türevini alalım. Sonucun $2x+1$ olması gerekir.
+```{r}
+f1 <- expression(x^2 + x - 1)
+f1_turev <- D(f1, "x")
+f1_turev
+
+# elde edilen sonuca (fonksiyona) aynı işlem tekrar yapılarak 2. türev de alınabilir.
+D(f1_turev, "x")
+```
+
+### integrate()
+
+<code>integrate()</code> fonksiyonu ile bir fonksiyonun integrali alınabilir. Örneğin, $4x^3-2x$ fonksiyonunun integralini alalım. Sonucun $x^4-x^2+c$ olması gerekir. Üst sınırın 2, alt sınırın 0 olduğu durumda alınan belirli integralin sonucu ise 12 olması gerekir.
+
+```{r}
+f2 <- function(x) {
+  4*x^3 - 2*x
+}
+integrate(f2, lower = 0, upper = 2)
+```
+
+### Sys.Date() ve Sys.time()
+
+<code>Sys.Date()</code> ve <code>Sys.time()</code> fonksiyonları sistemin tarih ve saatini yazdırmaya yarar. Çıktısı 'tarih' türünde bir nesnedir.
+
+```{r}
+Sys.Date()
+Sys.time()
+```
+
+### aggregate()
+
+aggregate() fonksiyonu veriyi alt veri setlerine göre gruplandırarak işlem yapma olanağı sağlar. Örnek için R'da bulunan `airquality` veri setini ele alalım. Bu veri setindeki `Ozone` ve `Temp` değişkenlerinin aylara (`Month`) göre ortalamalarını bulmak için aşağıdaki satır komutları kullanılır.
+
+```{r}
+head(airquality)
+aggregate(cbind(Ozone, Temp) ~ Month, data = airquality, mean)
+```
+
+### cor()
+
+`cor()` fonksiyonu ile korelasyon matrisleri (tabloları) elde edilebilir. Örneğin R'da bulunan `mtcars` isimli veri setindeki `mpg`, `cyl` ve `disp` değişkenlerinin ikili korelasyonlarını hesaplayalım.
+
+```{r}
+cor(mtcars[, 1:3])
+```
+
+Yukarıdaki satır komutunda köşeli parantez içinde verilen `1:3` ifadesi birinci sütundan üçüncü sütuna kadar olan sütunları seçmek için kullanılmaktadır. Bu nedenle çıktıda bu sütunlar (`mpg`, `cyl` ve `disp`) yer almaktadır.
+
+### merge()
+
+`merge()` fonksiyonu yardımıyla iki veri seti bir değişken üzerinden birleştirilebilir. Aşağıdaki örnekte Basketbol Süper Ligi ile ilgili istatistiklerden oluşan iki ayrı data frame üretilmiştir.
+
+```{r}
+# örnek uygulama için veri setlerini oluşturalım
+BSL1 <- data.frame(id = 1:11,
+                   takim = c("Anadolu Efes", "Fenerbahçe", "Eczacıbaşı", "Galatasaray", "İTÜ", "Ülkerspor",
+                             "Beşiktaş", "Tofaş", "Pınar Karşıyaka", "Altınordu", "Muhafızgücü"),
+                   sampiyonluk = c(16, 10, 8, 5, 5, 4, 2, 2, 2, 1, 1))
+BSL2 <- data.frame(ID = c(11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1),
+                   ikincilik = c(0, 0, 2, 3, 7, 5, 1, 4, 1, 10, 13),
+                   son_sapiyonluk = c("1974", "1967", "2015", "2000", "2012", "2006",
+                                      "1973", "2013", "1989", "2022", "2023"))
+
+# veri setlerini inceleyelim
+BSL1
+BSL2
+```
+
+Görüldüğü üzere `BSL1` ve `BSL2` veri setlerinde `id` ve `ID` değişkenleri aynıdır. Bu iki veri setindeki bilgiler bu değişkenler üzerinden birleştirilebilir.
+
+```{r}
+merge(BSL1, BSL2, by.x = "id", by.y = "ID")
+```
+
+Temel paketteki `merge()` fonksiyonu ile veri setlerinin birleştirilmesi yukarıda örneklendirilmiştir. Veri setlerini farklı şekilde birleştirme ile ilgili detaylı açıklamalar kitabın 'Veri Setlerini Birleştirme' bölümünde verilmiştir.
+
+### sub(), gsub() ve substr() Fonksiyonları
+
+`sub()`, `gsub()` ve `substr()` fonksiyonları ile bir karakter vektöründeki ifade bulunabilir ve bu ifade istenen karakterler ile değiştirilebilir.
+
+```{r}
+# ilk e harfini * ile değiştirme
+sub("e", "*", "metehan")
+
+# tüm e harflerini * ile değiştirme
+gsub("e", "*", "metehan")
+
+# kelimenin 1, 2, 3, ve 4. karakterini seçme
+substr("metehan", 1, 4)
+```
+
+Yukarıdaki örneklerden de anlaşıldığı üzere `sub()` fonksiyonu aranan 'e' ifadesini ilk bulduğu yeri '*' işareti ile değiştirmiştir. `gsub()` ise `sub()` fonksiyonunun genel halidir ve vektörde bulduğu tüm ifadeleri istenen işaret ile değiştirmiştir. `substr()` fonksiyonu ile ilgili karakterlerin 1'den 4'e kadar olan kısmı bir alt küme olarak alınmıştır.
+
+### grep() ve grepl() Fonksiyonları
+
+`grep()` ve `grepl()` fonksiyonları ile bir nesne içindeki bazı spesifik karakterler bulunabilir. Örneğin, BAFTA ödülüne layık görülen filmlerin isimlerini ve türlerini inceleyelim.
+
+```{r}
+# örneklendirmek için bir veri seti içe aktaralım.
+BAFTA_film <- read.csv("https://raw.githubusercontent.com/gungorMetehan/BAFTA/main/BAFTA_film.csv")
+
+# grep() yardımıyla filmler arasında adında 'la' ifadesi geçen filmlerin indekslerini bulalım.
+grep("la", BAFTA_film$film)
+
+# grepl() yardımıyla film türleri arasında 'Drama' türünde olan filmleri bulmaya çalışalım.
+grepl("Drama", BAFTA_film$genres)
+```
+
+`grep()` ve `grepl()` fonksiyonları benzer amaçlarla kullanılsa da, çıktılarının farklı olduğu görülecektir. `grep()` çıktı olarak ilgili satırların indekslerini verirken, `grepl()` her satırda aranan değerin bulunup bulunmadığına ilişkin mantıksal değerleri (TRUE ya da FALSE) verir.
+
+<div class="warning" style='background-color:#D3EEFF; color: #003E64; border-left: solid #003E64 4px; border-right: solid #003E64 4px; border-radius: 4px; padding:0.7em;'>
+<span>
+<p style='margin-top:1em; text-align:center'>
+<center><p>`r fontawesome::fa('circle-info',fill='#003E64', height = '2.5em')`</p></center>
+<b>BAFTA</b></p>
+<p style='margin-left:1em;'>
+BAFTA (British Academy of Film and Television Arts) Akademi Ödülleri'nin (Oscars) Birleşik Krallık'taki dengi olan ödül törenidir, her yıl düzenlenmektedir ve sinema, televizyon dallarında ödüller dağıtılır. Bu ödüller pek çok kategoride olabilir. Bunlardan bazıları şunlardır: en iyi film, en iyi yönetmen, en iyi kadın oyuncu, en iyi erkek oyuncu, en iyi yardımcı kadın oyuncu, en iyi yardımcı erkek oyuncu. Yıllara göre ödül alan filmler ile ilgili detaylı bilgiye organizasyonun [web sitesinden](https://www.bafta.org/) ulaşılabilir.
+</p>
+</span>
+</div>
+
+### Yuvarlama Fonksiyonları
+
+R'da sayıları yuvarlamak için pek çok seçenek vardır. Bunlardan bazıları aşağıda listelenmiştir.
+
+```{r}
+# beş tane gerçek (reel) sayıdan oluşan bir vektör oluşturalım
+bes_gercek_sayi <- c(.5, 8, 3.99, 1.04, 9.86)
+
+# round() ile yuvarlama yapılmaktadır. digits argümanına girilen değer virgülden sonra kaç tane basamak olmasını istediğimizi gösterir.
+round(bes_gercek_sayi, digits = 1)
+
+# signif() fonksiyonu sayıları önemli görülen toplam basamak sayısı kadar yuvarlama yapar.
+signif(bes_gercek_sayi, digits = 2)
+
+# ceiling() fonksiyonu vektördeki sayıları kendisine ya da üstündeki ilk tam sayıya yuvarlar.
+ceiling(bes_gercek_sayi)
+
+# floor() fonksiyonu vektördeki sayıları kendisine ya da altındaki ilk tam sayıya yuvarlar.
+floor(bes_gercek_sayi)
+
+# trunc() fonksiyonu vektördeki sayıların ondalık kısımlarını siler.
+trunc(bes_gercek_sayi)
+```
+
+## Alıştırmalar `r fontawesome::fa('pencil',fill='gray')`
+
+**Alıştırma 1**
+Kendisine verilen bir $k$ değerinin iki katından bir sayısını çıkaran bir fonksiyon yazınız.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+F_1 <- function(k) {
+  2*k - 1
+  }
+```
+
+</details>
+
+**Alıştırma 2**
+`matris_yeni <- matrix(c(1:100), nrow = 20, ncol = 5)` komutunu çalıştırarak matris nesnesini oluşturunuz. Ardından `apply()` fonksiyonunu kullanarak bu matrisi tüm sütunlarının ortalamalarını hesaplayınız. 
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+matris_yeni <- matrix(c(1:100), nrow = 20, ncol = 5)
+apply(matris_yeni, 2, mean)
+```
+
+</details>
+
+</details>
+
+**Alıştırma 3**
+`yeni_boy <- 175` komutunu çalıştırarak `yeni_boy` isimli nesneyi oluşturunuz. Ardından `if()` cümlesini kullanarak 165 değerine eşit veya büyük değerlerin 'Uygun' olarak ifade edilmesini sağlayınız.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+yeni_boy <- 175
+
+if (yeni_boy >= 165) { 
+print("Uygun") 
+}
+```
+
+</details>
+
+**Alıştırma 4**
+`for()` döngüsünü kullanarak 1'den 10'a kadar olan tam sayıların küplerini yazdırınız.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+y <- 1:10 
+for (i in y) {
+  print(i^3)
+  }
+```
+
+</details>

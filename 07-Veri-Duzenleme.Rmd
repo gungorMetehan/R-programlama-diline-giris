@@ -1,0 +1,584 @@
+# Veri Düzenleme
+
+Veri düzenleme, başlı başına üzerinde uzmanlaşılması gereken ayrı bir konudur. R’a aktarılan veriler ile analizler gerçekleştirmeden önce genellikle verinin düzenlenmesi gerekir. Bu düzenleme (manipülasyon) pek çok anlama gelebilir. Bu aşamada veri seti alt veri setlerine ayrılabilir, verinin bir bölümü seçilebilir, veri başka veriler ile birleştirilebilir… Veri düzenleme, veri analizi ve görselleştirme için önemli bir konu olduğu için pek çok kişi bu konuya kafa yormuştur ve R’da veri düzenleme yaparken kullanılmak üzere pek çok paket geliştirilmiştir. Bu bölümde Wickham, François, Henry, Müller ve Vaughan (2023) tarafından geliştirilmiş olan `dplyr` paketindeki fonksiyonlardan yararlanılacaktır. Bu kapsamlı ve oldukça kullanışlı paket hakkında detaylı bilgiye ulaşmak için [buraya](https://dplyr.tidyverse.org/) tıklayabilirsiniz. 
+Paketi indirmek için öncelikle `install.packages("dplyr")` komutunu çalıştırıyoruz, ardından aşağıdaki komut ile paketi çalışır hale getiriyoruz.
+
+```{r message=FALSE}
+library(dplyr)
+```
+
+Örnek uygulama için bize bir veri seti lazım. Bu noktada ‘İçe ve Dışa Aktarma’ bölümünde gördüğümüz fonksiyonlardan yararlanarak internetteki bir veri setini içe aktaralım. Bu veri seti Türkiye’deki ilköğretim ve ortaöğretim öğrenci istatistiklerini içermektedir. 357 değişkenden ve 81 satırdan (iller) oluşmaktadır. Değişken isimleri ile ilgili açıklamalara [buraya](https://github.com/gungorMetehan/TREduData) tıklayarak ulaşabilirsiniz.
+
+```{r message=FALSE}
+library(readr)
+TR_stu <- read_csv("https://raw.githubusercontent.com/gungorMetehan/TREduData/main/TREduData_student.csv")
+```
+
+İndirilen veri seti, R’a `TR_stu` olarak kaydedilmiştir. Veri setine genel bir bakış atmak için `glimpse()` fonksiyonundan yararlanılabilir.
+
+```{r}
+glimpse(TR_stu)
+```
+
+Oldukça uzun bir liste geldi. Zaten çıktının başında da veri setinde 81 satırın (iller) ve 357 sütunun (değişkenler) bulunduğu bilgisi yer alıyor. Bu bölümde bu veri setinden yararlanacağız. Ancak öncesinde küçük bir düzenleme yapalım. Örneğin plaka numaraları (`plate_number`) değişkeni karakter tipinde görünüyor. Bunu faktör olarak değiştirmek gerekmektedir. Buna benzer şekilde diğer karakter türündeki değişkenler de aslında birer faktör. Aşağıdaki satır komutlarını çalıştırarak karakter türündeki tüm verileri faktöre çevirebiliriz.
+
+```{r}
+TR_stu <- TR_stu |> 
+  mutate_if(is.character, as.factor)
+```
+
+Bu işlemin ardından son bir düzenleme daha yapmamız gerek. O da `gadm_L3number` ve `metropolitan` değişkenlerinin de faktöre dönüştürülmesi. Çünkü bu değişkenler R’a aktarılırken double tipinde aktarılmıştır. Bu düzenleme için aşağıdaki satır komutları çalıştırılabilir.
+
+```{r}
+TR_stu <- TR_stu |>
+  mutate_at(c("gadm_L3number", "metropolitan"), as.factor)
+```
+
+Uygulamalara geçmeden önce `dplyr` fonksiyonlarının ortak özelliklerini bilmek faydalı olabilir:
+<li>Bu fonksiyonların ilk argümanları her zaman data frame'dir.</li>
+<li>Sonraki argümanlar genellikle değişken adlarını kullanarak (tırnak işareti içine almadan) hangi sütunlarla çalışılacağını ifade eder.</li>
+<li>Çıktı her zaman yeni bir data frame'dir (Wickham, Çetinkaya-Rundel ve Grolemund, 2023).</li>
+`dplyr` paketindeki fonksiyonları birbirine bağlamak için ‘pipe’ adı verilen bir bağlantı operatörü kullanılmaktadır. Eskiden bu operatör `%>%` şeklinde iken artık `|>` şeklinde kullanılmaktadır. Bu operatör ile soldaki veri ya da fonksiyonun çıktısı alınıp sağdaki işlemin yapılması istenir. Temelde, şu şekilde ifade edilebilir: `x |> f(y)` ifadesi `f(x, y)` anlamına gelir. Benzer şekilde `x |> f(y) |> g(z)` de `g(f(x, y), z)` anlamına gelir. Açıklamaları bir kenara bırakalım, operatör ile ne yapıldığını satır komutları üzerinden görelim.
+
+```{r}
+TR_stu |> 
+  filter(metropolitan == 1)
+```
+
+Hatırlayacağınız üzere veri setinde 81 satır vardı. `metropolitan` değişkeni büyükşehir olma durumunu göstermekte. Bu değerin 1 olduğu – yani büyükşehir – durumların filtrelenmesi için `filter()` fonksiyonundan yararlanılmıştır. Bu örnekte satır komutunun en solunda veri setinin adı bulunmakta, ardından `|>` operatörü ile bu veri setine ne yapılmasını istediğimizi göstermek için bağlantı kuruyoruz. Ardından `filter()` fonksiyonu ile satırları filtreledik. Bu komutlar çalıştırıldığında yeni bir veri seti çıktı olarak sunulacaktır. Ancak unutulmamalıdır ki, bu veri seti (sadece büyükşehirlerden oluşan) herhangi bir yere kaydedilmemiştir. Eğer bu çıktı (yeni veri seti) kaydedilmek isteniyorsa daha önce öğrendiğimiz gibi `<-` atama operatörü ile çıktıyı bir nesneye atayabiliriz.
+
+```{r}
+TR_stu2 <- TR_stu |> 
+  filter(metropolitan == 1)
+```
+
+## filter() Fonksiyonu
+
+`filter()` fonksiyonu adından da anlaşıldığı üzere filtreleme yapmak için kullanılır. Örneğin;
+
+```{r}
+TR_stu |>
+  filter(student_s_pre_total_21_22 > 15000)
+```
+
+Bu komutlar çalıştırıldığında yeni bir veri seti oluşur ve bu veri seti yalnızca `student_s_pre_total_21_22` değerinin 15000’den fazla olduğu satırları içerir (yani 2021-2022 eğitim yılında toplam devlet ana okulu öğrencisi sayısı 15000’den fazla olan şehirler).
+`>` (büyüktür) işareti haricinde `>=` (büyük veya eşittir), `<` (küçüktür), `<=` (küçük veya eşittir), `==` (eşittir) ve `!=` (eşit değildir) sınamaları da yapılabilir. Bu sınamalar birlikte de kullanılabilir. Örneğin;
+
+```{r}
+TR_stu |>
+  filter(student_s_pre_total_21_22 > 15000 & metropolitan == 0)
+```
+
+Bu komutlar ile iki özelliği birlikte sağlayan satırlar istenmiştir. Yani toplam öğrenci sayısı 15000’in üzerinde olan büyükşehir olmayan şehirler. Yalnızca 3 şehir listelenecektir (`&` sembolü yerine `|` sembolünü koyarak işlemi tekrarlayınız, çıktının neden 77 satır içerdiği üzerine düşününüz).
+`%in%` de oldukça kullanışlı bir semboldür. Aşağıdaki örneği inceleyiniz.
+
+```{r}
+TR_stu |>
+  filter(NUTS_level1 %in% c("TRA", "TRB", "TRC"))
+```
+
+Burada `NUTS_level1` (istatistiki bölge birimleri sınıflandırması – düzey 1) değişkeninde TRA, TRB ve TRC değerlerini içeren satırlar ekrana getirilecektir. Bu şehirler 24 tanedir.
+
+
+## arrange() Fonksiyonu
+
+`arrange()` fonksiyonu ile satırların sıralaması düzenlenebilir. Örneğin, `TR_stu` isimli veri seti `gadm_L3number` değişkenine göre sıralanmıştır. Oysa biz bunu plakalara (`plate_number`) sıralı halde görmek isteyebilir, bu şekilde düzenlenmiş bir veri seti ile çalışmak isteyebiliriz. Bunun için;
+
+```{r}
+TR_stu |>
+  arrange(plate_number)
+```
+
+Sıralamanın 1’den 81’e doğru değil de tam tersi şekilde gitmesini istiyorsak, `arrange()` fonksiyonunu `desc()` fonksiyonu ile birlikte kullanabiliriz.
+
+```{r}
+TR_stu |>
+  arrange(desc(plate_number))
+```
+
+Kısaca `arrange()` fonksiyonu ile veri setindeki satırların sıraları değiştirilebilir. Bu sırada veri seti değişmez, yani bir filtreleme söz konusu değildir.
+
+## distinct() Fonksiyonu
+
+`distinct()` fonksiyonu veri setinin satırlarındaki eşsiz (unique) değerleri listelemek için kullanılır. Örneğin `TR_stu` veri setimizde kaç tane istatistiki bölge birimleri bulunuyor, bunu görmek için aşağıdaki komutları çalıştırabiliriz.
+
+```{r}
+TR_stu |>
+  distinct(NUTS_level1_name)
+```
+
+Görüldüğü üzere sonuç 12. `distinct()` fonksiyonu ilgili sütundaki değerleri inceler ve aynı olanlardan yalnızca bir tanesini (ilkini) ekrana getirir. Bu eşsizleştirme ile birlikte diğer sütunların kaybolduğunu fark etmişsinizdir. Bu sütunları da veri setinde tutmak istiyorsanız aşağıdaki komutları kullanabilirsiniz.
+
+```{r}
+TR_stu |>
+  distinct(NUTS_level1_name, .keep_all = TRUE)
+```
+
+Bu durumda 12 satırın yanına veri setindeki tüm sütunlar eklenecektir. Ancak, başka herhangi bir işlem gerçekleştirilmediğini fark ediniz. Burada yalnızca 12 eşsiz `NUTS_level1_name` değeri listelenmekte ve bu değerlerin karşısındaki değerler yanlarına getirilmektedir. Tüm veri seti 81 satırdan oluşmakta idi. Yani, istatistiki bölgelerin kaç tane olduğundan habersiziz. Bu noktada `count()` fonksiyonu ile çakışmaların kaç adet olduğu listelenebilir.
+
+```{r}
+TR_stu |>
+  count(NUTS_level1_name)
+```
+
+## mutate() Fonksiyonu
+
+`mutate()` fonksiyonu ile veri setinde bulunan değişkenlerden veri seti için yeni değişkenler üretilebilir ve bu yeni değişkenler veri seti ile birleştirilebilir. Örneğin, `TR_stu` nesnesinde (veri setinde) yer alan 2021-2022 eğitim öğretim yılında devlet liselerinde eğitim gören erkek ve kız öğrencilerin toplam sayısı aşağıdaki komut ile hesaplanarak veri setine yeni bir değişken (`toplam_devlet_lise`) olarak eklenebilir.
+
+```{r}
+TR_stu3 <- TR_stu |>
+  mutate(toplam_devlet_lise = student_s_high_m_21_22 + student_s_high_f_21_22)
+```
+
+Bu veri setinde aslında bu toplam değer vardır. İşlemin doğru olup olmadığını anlamak için `identical()` fonksiyonu ile iki vektörün eş olup olmadığını test edebiliriz.
+`identical(TR_stu3$toplam_devlet_lise, TR_stu$student_s_high_total_21_22)`
+Görüldüğü üzere (`TRUE`) `TR_stu3`’te yer alan yeni değişken ile uygulama verisinde yer alan değişken birebir aynıdır.
+
+`mutate()` fonksiyonu ile ilgilendiğimiz değişkenin veri setindeki pozisyonunu da değiştirebiliriz. Bunun için `.before` ve `.after` argümanları kullanılır.
+
+```{r}
+TR_stu |>
+  mutate(toplam_devlet_lise = student_s_high_m_21_22 + student_s_high_f_21_22,
+         .before = province_upper)
+```
+
+Yeni üretilen değişken `province_upper` değişkeninin bir öncesine eklenmiştir.
+
+```{r}
+TR_stu |>
+  mutate(toplam_devlet_lise = student_s_high_m_21_22 + student_s_high_f_21_22,
+         .after = NUTS_level1_name)
+```
+
+Yeni üretilen değişken `NUTS_level1_name` değişkeninin bir sonrasına eklenmiştir.
+Bu fonksiyon ile aritmetik işlemler de yapılabilir. Örneğin, seçilen bir değişken 1000 sayısına bölünebilir (`/`) ya da değişkenin karesi (`^2`) alınabilir. Çıkarma işlemi (`-`) ya da toplama işlemi (`+`) yapılabilir.
+
+## select() Fonksiyonu
+
+`select()` fonksiyonu ile bir veri setindeki ilgilenilen değişkenler seçilebilir. Örneğin;
+
+```{r}
+TR_stu |>
+  select(plate_number, province_upper, student_all_total_21_22)
+```
+
+Yukarıdaki komutlar çalıştırıldığında, 3 değişkenden oluşan daha küçük bir veri seti elde edilecektir. Bu veri seti plaka numaralarını, şehir adlarını ve 2021-2022 eğitim yılındaki tüm öğrencilerin sayılarını (devlet okulları ve özel okullar, ana okulundan lise sona kadar) verecektir.
+
+Değişken isimlerinin arasında `:` konarak bir seçilen iki sütun arasındaki tüm sütunlar birlikte ele alınabilir.
+
+```{r}
+TR_stu |>
+  select(plate_number:NUTS_level2)
+```
+
+Yukarıdaki satır komutları çalıştırıldığında `plate_number`’dan `NUTS_level2`’ye kadar olan tüm sütunlardan oluşan yeni bir veri seti üretilecektir.
+
+```{r}
+TR_stu |>
+  select(!plate_number:NUTS_level2)
+```
+
+İki değişken arasındaki değişkenler haricindeki diğer tüm değişkenleri seçmek için ise yukarıdaki satır komutlarını kullanabiliriz (`!` işareti R’da “değil” anlamında kullanılmaktadır).
+
+`select()` fonksiyonu `where()` fonksiyonu ile birlikte kullanılan tek tipteki değişkenler seçilebilir.
+
+```{r}
+TR_stu |>
+  select(where(is.factor))
+```
+
+Bu özellikler dışında, `select()` fonksiyonuna yardımcı fonksiyonlardan oldukça yararlı olabilir. Örneğin `starts_with()` fonksiyonu ile ilk karakterleri bilinen değişkenlerden oluşan yeni bir veri seti yaratılabilir.
+
+```{r}
+TR_stu |>
+  select(starts_with("student_all"))
+```
+
+Yukarıdaki satır komutları çalıştırıldığında değişken ismi `student_all` ile başlayan toplam öğrenci sayılarını içeren değişkenlerden oluşan yeni bir veri seti elde edilecektir. Bu özellikle TIMSS, PISA gibi geniş ölçekli veri setlerinde veri düzenleme için oldukça kullanışlıdır. Çünkü bu uygulamaların sonrasında paylaşılan veri setlerindeki değişken isimleri kodlar içermekte ve aynı kod ile başlayan değişkenler genellikle aynı yapı ile ilişkili olmaktadır.
+
+Değişken isminin baş karakterleri haricinde son karakterleri ile ilgili bir işlem de yapmak gerekebilir.
+
+```{r}
+TR_stu |>
+  select(ends_with("_21_22"))
+```
+
+Yukarıdaki satır komutu çalıştırıldığında, sonunda `_21_22` karakterlerini içeren değişkenlerden oluşan yeni bir veri seti elde edilecektir. Bu veri seti yalnızca 2021-2022 eğitim yılına ilişkin verilerden oluşan bir alt veri setidir.
+
+```{r}
+TR_stu |>
+  select(contains("ele"))
+```
+
+Yukarıdaki satır komutları ile de içinde `ele` karakterleri bulunan değişkenler seçilebilir. Bu örnek uygulamada elde edilen veri seti yalnızca ilkokul (elementary) verilerini içerecektir.
+
+## rename() Fonksiyonu
+
+`rename()` fonksiyonu ile değişken isimleri değiştirilebilir. Basitçe, `gadm_L3number` değişkeninin ismini `L3` olarak değiştirelim.
+
+```{r}
+TR_stu |>
+  rename(L3 = gadm_L3number)
+```
+
+Birden fazla değişkenin ismi, tek tek isimleri girilerek değiştirilebilir.
+
+```{r}
+TR_stu |>
+  rename(L3 = gadm_L3number, plaka = plate_number, sehir = province_upper)
+```
+
+Görüldüğü üzere üç değişkenin ismi de değişmiştir.
+
+## group_by() Fonksiyonu
+
+`group_by()` fonksiyonu veri setini değişkenlere göre gruplara ayırmaya yarar. Bu fonksiyon ile gruplara ayrılan veri sonrasında gruplara göre analiz edilebilir.
+
+```{r}
+TR_stu |>
+  group_by(NUTS_level1_name)
+```
+
+Yukarıdaki satır komutları çalıştırıldığında veri, istatistiki bölge birimlerine (düzey 1) göre gruplandırılacaktır. Veri setinde herhangi bir değişiklik olmadığını fark etmiş olabilirsiniz. Ancak, R’ın verdiği çıktıda `Groups:   NUTS_level1_name [12]` yazacaktır. Bu, verinin 12 gruba ayrıldığını göstermektedir. Gerçekten de veri setinde 12 istatistiki bölge birimi bulunmaktadır. Bu fonksiyonun işlevi, diğer fonksiyonlarla birleştirildiğinde daha anlamlı görünebilir. Bu nedenle bu fonksiyon, sonraki başlıklarda tekrar ele alınacaktır.
+
+## summarize() Fonksiyonu
+
+`summarize()` fonksiyonu bir başka gruplama fonksiyonudur. Pek çok amaçla kullanılabilir. Örneğin;
+
+```{r}
+TR_stu |>
+  group_by(NUTS_level1_name) |>
+  summarize(ort_dev_anaokulu = mean(student_s_pre_f_20_21))
+```
+
+Yukarıdaki satır komutları çalıştırıldığında, önce veri `NUTS_level1_name` değişkenine göre gruplandırılacaktır (az önce örneklendirmiştik, 12 gruba ayrılacaktır). Ardından, 2020-2021 eğitim yılında devlet ana okullarında eğitim gören kız öğrencilerin sayısının ortalamasını bu bölgelere göre hesaplayacaktır. Sonuç olarak ise 12 satırlık bir veri sunacaktır. Bu veri setinde istatistiki bölge birimleri ve her bir istatistiki bölge birimindeki öğrenci sayısı ortalaması yer almaktadır. Tahmin edileceği üzere, `mean()` fonksiyonunun haricinde pek çok farklı fonksiyon kullanılabilir.
+
+
+## slice_*() Fonksiyonları
+
+Pek çok `slice_*()` fonksiyonu bulunmaktadır. Bu fonksiyonlar, genel itibarıyla veriyi dilimlemeye yarar.
+
+```{r}
+# veri setinin ilk 5 satırını seçmek için
+TR_stu |>
+  slice_head(n = 5)
+
+# veri setinin son 3 satırını seçmek için
+TR_stu |>
+  slice_tail(n = 3)
+
+# veri setindeki bir değişkenin en küçük 3 değerini içeren satırları seçmek için
+TR_stu |>
+  slice_min(student_pre_total_19_20, n = 3)
+
+# veri setindeki bir değişkenin en büyük 3 değerini içeren satırları seçmek için
+TR_stu |>
+  slice_max(student_pre_total_19_20, n = 3)
+
+# veri setinden rastgele 4 satır seçmek için (her çalıştırmada farklı satırların seçilmesi mümkündür)
+TR_stu |>
+  slice_sample(n = 4)
+```
+
+## Pipe (|>) Bağlantı Operatörü
+
+Pipe (`|>`) bağlantı operatörü fonksiyonları birbirine bağlamak için kullanılan bir operatördür. Oldukça geniş bir kullanımı vardır. Bu bölümdeki örneklerden de fark ettiğiniz üzere, geleneksel kod yazımından oldukça farklıdır. Genellikle kod yazarken (Excel’de fonksiyon yazarken olduğu gibi) öncelikle en içteki fonksiyon işlevini yerine getirir, sonra onun dışındaki, sonra onun dışındaki... Bu şekilde devam eden yapı hemen hemen her programlama dilinde mevcuttur. Ancak, `|>` ile sağa doğru akan, sıralı bir fonksiyon yazımı ve fonksiyonların işlevini yerine getirmesi söz konusudur. Pek çok kişiye bu kodları okumak daha kolay geldiği için, bu bağlantı operatörü yaygın olarak kullanılmaktadır. Pek çok kaynakta bağlantı operatörünü `%>%` şeklinde görmüş olmanız mümkündür. Eskiden bu şekilde `magrittr` paketi aracılığı ile kullanılıyor idi ve klavyedeki kısa yol tuşu `Ctrl + Shift + M` idi. Ancak, Wickham ve arkadaşları (2023) artık `|>` kullanımını önermektedir. Bu şekilde kullanım daha kolay. Klavyedeki tuşlar ile bu iki sembol bir araya getirilebilir ya da `Tools > Global Options...` yolu izlenerek açılan `Options` (ayarlar) penceresinden pipe operatörünün kısa yol tuşu düzenlenebilir. Bunun için ayarlar penceresi açıldıktan sonra, `Code` bölümüne gelmeli ve `Use native pipe operator` seçeneğini işaretlemelisiniz. `OK` denildikten sonra, artık `Ctrl + Shift + M` kısa yol tuşları ile bu yeni operatörü kullanabilirsiniz.
+Şimdiye kadar öğrendiğimiz, veri düzenlemede sıkça kullanılan birkaç fonksiyonu birlikte kullanarak bir veri düzenlemesi yapalım.
+
+```{r}
+TR_stu |>
+  filter(metropolitan == 1) |>
+  select(where(is.double))
+```
+
+Yukarıdaki satır komutları ile elde edilen yeni veri setine bakalım. Ardından, bu satır komutlarının sırası ile neleri gerçekleştirdiğini bulalım. En solda veri seti yer almaktadır. Ardından bir pipe operatörü kullanılarak bu veri seti ile bir şey yapılmasının istendiği R’a söylenmiştir. `filter()` fonksiyonu ile veri seti filtrelenmiştir. Burada yeni veri setinde yalnızca `metropolitan` değerinin 1 olduğu satırların olması istenmiştir (yani büyük şehir belediyesi olan şehirler). Satır komutları burada sonlansa idi, yalnızca büyük şehir verilerinden oluşan bir veri seti elde edilmiş olacaktı. Ancak bu satırın sonuna getirilen yeni bir pipe bağlantı operatörü ile yeni elde edilen veri seti üzerinde başka işlemler yapılması istenmiştir. `select()` fonksiyonu ile büyük şehir verilerini içeren yeni veri setindeki double türündeki nümerik veriler içeren değişkenlerin seçilmesi istenmiştir. Böylelikle, yalnızca büyük şehirlere ait sayısal değerler içeren bir veri seti oluşturulmuştur.
+
+Bir başka örnek deneyelim.
+
+```{r}
+TR_stu |>
+  filter(student_s_pre_total_21_22 > 10000 & metropolitan == 0) |>
+  select(plate_number:NUTS_level2) |>
+  rename(plaka = plate_number, sehir = province_upper) |> 
+  arrange(plaka)
+```
+
+Yukarıdaki satır komutları ile elde edilen yeni veri setine bakalım. Ardından, bu satır komutlarının sırası ile neleri gerçekleştirdiğini bulalım. Burada öncelikle veri seti iki sınama ile filtrelenmiş. Buna göre 2021-2022 eğitim yılında devlet anaokulundaki öğrenci sayısı 10000’den büyük olan büyük şehir olmayan şehirlerin olduğu satırlardan oluşan bir veri seti elde edilmiştir. Ardından `plate_number` değişkeninden `NUTS_level2` değişkenine kadar olan sütunların olduğu kısmı seçilmiştir. Sonrasında `rename()` fonksiyonu ile `plate_number` ve `province_upper` değişkenlerinin adı değiştirilmiştir. Ardından `plaka` değişkeninin (önceki ismi `plate_number` idi, burada dördüncü satırda ismi değiştirildi) değerlerinin küçükten büyüğe sıralandığı hali ile yeni bir veri seti sunulması istenmiştir. Bu nedenle 8 satırdan, 5 değişkenden oluşan bir veri seti elde edilmiştir.
+
+## Veri Setlerini Birleştirme (Join Fonksiyonları)
+
+Sosyal bilimler alanında yürütülen çalışmaların veri toplama süreci sonunda elde edilen veri setleri bir karmaşa içinde olabilir. Bu veri setlerinin birleştirilmesi de ciddi bir uğraş haline gelebilir. Örneğin, boylamsal bir çalışmada deneklerden birkaçı ilk uygulamaya katılmamış olabilir, ancak ikinci uygulamaya katılmış olabilir. Bu durumda iki veri setindeki satır sayıları farklılaşabilir. Geniş çaplı bir çalışmada, veri toplayıcılar farklı olabilir ve veri girişi esnasında değişken isimlerini farklı şekillerde girmiş olabilirler. Bu verilerin R'da `dplyr` paketi yardımıyla nasıl birleştirilebileceğini, örneklerle görelim.
+Öncelikle üzerinde çalışabileceğimiz üç ayrı veri seti oluşturalım. Bu veri setlerinde toplamda sekiz öğrenciye ilişkin veriler bulunmaktadır. Farklı sınıf düzeylerindeki öğrencilerin matematik okuryazarlığına ilişkin iki ölçüm ve sözel becerileriyle ilgili bir ölçüm alınmış olsun. 
+
+```{r}
+ogr_ID <- 1:6
+sinif <- rep(7:8, 3)
+matematik_O1 <- c(40, 40, 50, 80, 60, 40)
+veri1 <- data.frame(ogr_ID, sinif, matematik_O1)
+veri1
+
+ID <- 1:8
+sinif <- c(7, 8, 7, 8, 7, NA, 7, 8)
+matematik_O2 <- c(45, 45, 60, 80, 55, 45, 60, 60)
+veri2 <- data.frame(ID, sinif, matematik_O2)
+veri2
+
+ogr_ID <- 1:5
+sozel <- c(100, 90, 90, 80, 80)
+veri3 <- data.frame(ogr_ID, sozel)
+veri3
+```
+
+Görüldüğü üzere `veri1`'de 6 öğrenci bulunurken, `veri2`'de 8 öğrenci bulunmaktadır. Ancak ID'lerden anlaşıldığı üzere bu 6 öğrenci aynı öğrencilerdir. `veri3` ise aynı öğrenciler ile ilgili farklı bilgilerin yer aldığı bir nesnedir.
+
+### inner_join()
+
+Burada iki uygulamaya yer verilmiştir. Oluşturulan `yeni_veri1` isimli nesne, `veri1` ve `veri2`'nin birleşimi iken `yeni_veri2` isimli nesne `veri1`, `veri2` ve `veri3`'ün birleşiminden oluşmaktadır.
+
+```{r}
+# iki veri setinin birleştirilmesi
+yeni_veri1 <- veri1 |>  
+  inner_join(veri2, by = c("ogr_ID" = "ID"))
+yeni_veri1
+
+# üç veri setinin birleştirilmesi
+yeni_veri2 <- veri1 |> 
+  inner_join(veri2, by = c("ogr_ID" = "ID")) |>
+  inner_join(veri3)
+yeni_veri2
+```
+
+`yeniveri1` incelendiğinde görülecektir ki, `inner_join()` fonksiyonu iki veri setini `ID` değişkenine göre birleştirmekte (bu sırada ID değişkenindeki kesişimleri ele alır) ve her iki veri setindeki değişkenleri yeni nesneye aktarmaktadır.
+
+`yeniveri2` incelendiğinde görülecektir ki, üç veri seti birleştirilirken yine `ID`'lerin kesişimi ele alınmış ve tüm veri setlerindeki tüm değişkenler yeni veri nesnesine kaydedilmiştir.
+
+### left_join()
+
+Burada iki uygulamaya yer verilmiştir. Oluşturulan `yeni_veri3` isimli nesne, `veri1` ve `veri2`'nin birleşimi iken `yeni_veri4` isimli nesne `veri1`, `veri2` ve `veri3`'ün birleşiminden oluşmaktadır.
+
+```{r}
+# iki veri setinin birleştirilmesi
+yeni_veri3 <- veri1 |>  
+  left_join(veri2, by = c("ogr_ID" = "ID"))
+yeni_veri3
+
+# üç veri setinin birleştirilmesi
+yeni_veri4 <- veri1 |>  
+  left_join(veri2, by = c("ogr_ID" = "ID")) |>
+  left_join(veri3)
+yeni_veri4
+```
+
+`yeni_veri3` incelendiğinde görülecektir ki, `left_join()` fonksiyonu iki veri setini `ID` değişkenine göre birleştirirken soldaki (ilk) veri setini göz önünde bulundurarak kesişimleri ele almış ve iki veri setindeki tüm değişkenleri yeni veri nesnesine kaydetmiştir.
+
+`yeni_veri4` incelendiğinde görülecektir ki, üç veri seti birleştirilirken yine ilk önce `ID`'lerin kesişimi ele alınmıştır. İkinci aşamada ise eldeki 6 öğrencilik veri seti öncelenmiş ve bu 6 öğrenci üzerinden veri setlerindeki tüm değişkenler yeni veri nesnesine kaydedilmiştir (Burada dikkat edilmesi gereken şudur: eğer `veri3`'ün eklenmesi durumunda doğrudan kesişim alınsa idi yeni veri setinde 5 öğrenciye ilişkin veri olması gerekirdi).
+
+### right_join()
+
+Burada iki uygulamaya yer verilmiştir. Oluşturulan `yeni_veri5` isimli nesne, `veri1` ve `veri2`'nin birleşimi iken `yeni_veri6` isimli nesne `veri1`, `veri2` ve `veri3`'ün birleşiminden oluşmaktadır.
+
+```{r}
+# iki veri setinin birleştirilmesi
+yeni_veri5 <- veri1 |>  
+  right_join(veri2, by = c("ogr_ID" = "ID"))
+yeni_veri5
+
+# üç veri setinin birleştirilmesi
+yeni_veri6 <- veri1 |>  
+  right_join(veri2, y = veri2, by = c("ogr_ID" = "ID")) |>  
+  right_join(veri3)
+yeni_veri6
+```
+
+`right_join()` fonksiyonu, `left_join()` fonksiyonun soldan (ilk setten) başlayarak yaptığı işlemleri sağdan başlayarak gerçekleştirmektedir. Bu nedenle iki veri setinden ikinci sırada birleştirme işlemine alınan `veri2`'deki 8 öğrenciden oluşan yeni veri seti (`yeni_veri5`) görüntülenmektedir.
+
+Üç veri setinin birleştirilmesi durumunda ise son aşamada `veri3` ele alındığı için hem bu veri setindeki değişkenler, hem de 5 öğrenci öncelenmektedir.
+
+### full_join()
+
+Burada iki uygulamaya yer verilmiştir. Oluşturulan `yeni_veri7` isimli nesne, `veri1` ve `veri2`'nin birleşimi iken `yeni_veri8` isimli nesne `veri1`, `veri2` ve `veri3`'ün birleşiminden oluşmaktadır.
+
+```{r}
+# iki veri setinin birleştirilmesi
+yeni_veri7 <- veri1 |>  
+  full_join(veri2, by = c("ogr_ID" = "ID"))
+yeni_veri7
+
+# üç veri setinin birleştirilmesi
+yeni_veri8 <- veri1 |>  
+  full_join(veri2, y = veri2, by = c("ogr_ID" = "ID")) |>  
+  full_join(veri3)
+yeni_veri8
+```
+
+`full_join()` fonksiyonu ile veri setleri doğrudan birleştirilmektedir (kümelerdeki birleşim işlemi gibi). `yeni_veri7` incelenecek olursa `veri1` ve `veri2`'deki tüm verilerin birleştirildiği görülecektir. Bir veri setinde 8, diğerinde 6 öğrenci olduğu için satır sayısı eksik olan veri setindeki eksik gözlemler yerine NA (kayıp veri) ataması yapılmaktadır.
+
+Üç veri seti birleştirilirken de yine aynı şekilde tüm değişkenler ve tüm satırlar yeni veri nesnesine kaydedilmektedir. Eksik olan gözlemler yerine NA ataması yapılmaktadır.
+
+### semi_join()
+
+Burada tek uygulamaya yer verilmiştir. Oluşturulan `yeni_veri9` isimli nesne, `veri2` ve `veri3`'ün birleştirilmesi ile elde edilmiştir.
+
+```{r}
+yeni_veri9 <- veri2 |>  
+  semi_join(veri3, by = c("ID" = "ogr_ID"))
+yeni_veri9
+```
+
+`yeni_veri9` incelendiğinde görülecektir ki, `semi_join()` fonksiyonu soldaki (ilk) veri setinin değişkenlerini ele almakta ve birinci ve ikinci veri setlerindeki `ID` değişkenine göre kesişen elemanları listelemektedir.
+
+### anti_join()
+
+Burada tek uygulamaya yer verilmiştir. Oluşturulan `yeni_veri10` isimli nesne, `veri2` ve `veri3`'ün birleştirilmesi ile elde edilmiştir.
+
+```{r}
+yeni_veri10 <- veri2 |>  
+  anti_join(veri3, by = c("ID" = "ogr_ID"))
+yeni_veri10
+```
+
+`yeni_veri10` incelendiğinde görülecektir ki, `anti_join()` fonksiyonu yine soldaki (ilk) veri setinin değişkenlerini ele almakta ve birinci ve ikinci veri setlerindeki `ID` değişkenine göre kesişmeyen elemanları listelemektedir.
+
+Veri Setlerini Birleştirme başlığı altında yer alan ilk dört fonksiyon (inner_join, left_join, right_join ve full_join) birleştirme (mutating) fonksiyonları olarak adlandırılırken, son iki fonksiyon (semi_join ve anti_join) filtreleme (filtering) fonksiyonları olarak adlandırılmaktadır. Gerçekten de ilk dört fonksiyon ile veri setleri birleştirilerek yeni setler oluşturulurken, son iki fonksiyon aracılığı ile bir çeşit filtreleme yapılmaktadır. Birleştirme fonksiyonları ile ilgili kapsamlı bilgiye [buradan](https://dplyr.tidyverse.org/reference/mutate-joins.html), filtreleme fonksiyonları ile ilgili kapsamlı bilgiye ise [buradan](https://dplyr.tidyverse.org/reference/filter-joins.html) erişebilirsiniz. Birleştirme fonksiyonlarının çalışma mantığının anlaşılması biraz zaman alabilir. Ancak, hepsinin birbirinden farklı bir amaca hizmet ettiğinin farkında olunmalıdır. Veri birleştirme yaptıktan sonra elde edilen yeni veri setinin incelenmesi önemlidir.
+
+## Alıştırmalar `r fontawesome::fa('pencil',fill='gray')`
+
+**Alıştırma 1**
+Aşağıda verilen linkte bulunan e-spor veri setini `read.csv()` fonksiyonu yardımı ile R'a aktarınız ve nesnenin adını `EF_team_stats` olarak belirleyiniz.
+<li>Link: https://raw.githubusercontent.com/gungorMetehan/EFData/main/EF_team_stats.csv</li>
+Ardından `filter()` fonksiyonu yardımıyla 2023 yılındaki (`year`), `maps_played` değişkeninin 10'dan büyük olduğu durumları filtreleyerek yeni bir veri seti üretiniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+EF_team_stats <- read.csv("https://raw.githubusercontent.com/gungorMetehan/EFData/main/EF_team_stats.csv")
+EF_team_stats |>
+  filter(maps_played > 10 & year == 2023)
+```
+
+</details>
+
+**Alıştırma 2**
+Alıştırma 1'de içe aktarılan `EF_team_stats` nesnesinde (veri setinde) bulunan verileri `rounds_played` değişkenine göre büyükten küçüğe sıralayınız (Bunun için `arrange()` fonksiyonundan yararlanınız). Sonrasında ilk 5 satırı `head()` fonksiyonu yardımıyla yazdırınız.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+EF_team_stats |>
+  arrange(desc(rounds_played)) |>
+  head(5)
+```
+
+</details>
+
+**Alıştırma 3**
+Alıştırma 1'de içe aktarılan `EF_team_stats` veri setinde farklı haritada (`map`) maç oynandığını `distinct()` fonksiyonu yardımıyla bulunuz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+EF_team_stats |>
+  distinct(map)
+```
+
+</details>
+
+**Alıştırma 4**
+Alıştırma 1'de içe aktarılan `EF_team_stats` veri setindeki `total_kills` değerlerinin `total_deaths` değerlerinin bölümünden yeni bir değişken oluşturunuz, bu değişkene `ratio` ismini veriniz (Bunun için `mutate` fonksiyonundan yararlanınız). Sonrasında ilk 5 satırı `head()` fonksiyonu yardımıyla yazdırınız.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+EF_team_stats |>
+  mutate(ratio = total_kills / total_deaths) |>
+  head(5)
+```
+
+</details>
+
+**Alıştırma 5**
+Alıştırma 1'de içe aktarılan `EF_team_stats` veri setindeki `year`, `wins`, `draws` ve `losses` değişkenlerinden oluşan bir alt veri seti oluşturunuz (Bunun için `select()` fonksiyonundan yararlanınız). Sonrasında ilk 10 satırı `head()` fonksiyonu yardımıyla yazdırınız.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+EF_team_stats |>
+  select(year, wins, draws, losses) |>
+  head(10)
+```
+
+</details>
+
+**Alıştırma 6**
+Alıştırma 1'de içe aktarılan `EF_team_stats` veri setindeki `map` değişkeninin adını `harita` olarak değiştiriniz. Sonrasında ilk 12 satırı `head()` fonksiyonu yardımıyla yazdırınız.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+EF_team_stats |>
+  rename(harita = map) |>
+  head(12)
+```
+
+</details>
+
+**Alıştırma 7**
+Alıştırma 1'de içe aktarılan `EF_team_stats` veri setindeki verileri `match` değişkenine göre gruplandırınız.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+EF_team_stats |>
+  group_by(match)
+```
+
+</details>
+
+**Alıştırma 8**
+Alıştırma 1'de içe aktarılan `EF_team_stats` veri setindeki verileri `match` değişkenine göre gruplandırınız. Ardından her bir `match` kategorisindeki `maps_played` değişkeninin değerlerinin toplamını bulunuz. Bu değişkene `toplam` ismini veriniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+EF_team_stats |>
+  group_by(match) |> 
+  summarize(toplam = sum(maps_played))
+```
+
+</details>
+
+**Alıştırma 9**
+Alıştırma 1'de içe aktarılan `EF_team_stats` veri setinin
+<li>ilk 3 satırını</li>
+<li>son 3 satırını</li>
+<li>`rounds_played` değişkeninin en düşük 3 değerinin bulunduğu satırları (çok sayıda değer 0 olduğu için üçten fazla satır elde edilecektir.)</li>
+<li>`rounds_played` değişkeninin en yüksek 3 değerinin bulunduğu satırları</li>
+`slice_*()` fonksiyonlarından yararlanarak yazdırınız.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r}
+# ilk 3 satır
+EF_team_stats |>
+  slice_head(n = 3)
+# son 3 satır
+EF_team_stats |>
+  slice_tail(n = 3)
+# rounds_played değişkeninin en düşük değer aldığı 3 satır (ancak üçten fazla satır elde edilecektir)
+EF_team_stats |>
+  slice_min(rounds_played, n = 3)
+# rounds_played değişkeninin en yüksek değer aldığı 3 satır
+EF_team_stats |>
+  slice_max(rounds_played, n = 3)
+```
+
+</details>

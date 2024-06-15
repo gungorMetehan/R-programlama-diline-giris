@@ -1,0 +1,15 @@
+# Okuma Önerileri
+
+## Çevrim İçi Kaynaklar
+
+<li>[Alex Douglas, Deon Roos, Francesca Mancini, Ana Couto & David Lusseau - An Introduction to R](https://intro2r.com/)</li>
+<li>[Nathaniel D. Phillips – YaRrr! The Pirate’s Guide to R](https://bookdown.org/ndphillips/YaRrr/)</li>
+<li>[Roger D. Peng - R Programming for Data Science](https://bookdown.org/rdpeng/rprogdatascience/)</li>
+<li>[Trevor French - R for Data Analysis](https://trevorfrench.github.io/R-for-Data-Analysis/)</li>
+<li>[W. N. Venables, D. M. Smith and the R Core Team - An Introduction to R](https://cran.r-project.org/doc/manuals/R-intro.pdf)</li>
+
+## Basılı Kaynaklar
+
+<li>[Andy Field, Jeremy Miles, & Zoë Field – Discovering Statistics Using R](https://us.sagepub.com/en-us/nam/discovering-statistics-using-r/book236067)</li>
+<li>[Michael J. Crawley – The R Book](https://onlinelibrary.wiley.com/doi/book/10.1002/9781118448908)</li>
+<li>[Richard Cotton – Learning R: A Step-by-Step Function Guide to Data Analysis](https://www.oreilly.com/library/view/learning-r/9781449357160/)</li>

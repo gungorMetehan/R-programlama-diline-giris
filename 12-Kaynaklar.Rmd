@@ -1,0 +1,8 @@
+# KAYNAKLAR {-}
+
+<li>Chambers, J. M. (1998). _Programming with data: A guide to the S language_. Springer.</li>
+<li>Ihaka, R., & Gentleman. R. (1996). A language for data analysis and graphics. _Journal of Computational and Graphical Statistics_, _5_(3), 299-314.</li>
+<li>Peng, R. D. (2022). _R programming for data science_. https://bookdown.org/rdpeng/rprogdatascience/</li>
+<li>Wickham, H. (2019). _Advanced R_ (2nd Ed.). CRC Press.</li>
+<li>Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). _R for data science_ (2nd Ed.). O'Reilly.</li>
+<li>Wickham, H., François, R., Henry, L., Müller, K., & Vaughan, D. (2023). _dplyr: A Grammar of Data Manipulation_. R package version 1.1.4. https://dplyr.tidyverse.org.</li>

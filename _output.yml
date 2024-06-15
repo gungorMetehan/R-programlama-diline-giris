@@ -1,0 +1,14 @@
+bookdown::gitbook:
+  css: style.css
+  split_by: rmd
+  config:
+    toc:
+      before: |
+        <li><a href="./">R Programlama Diline Giriş</a></li><br/>
+        <li class = "toc-logo"><center><img src = "epodder.png"></center>
+      after: |
+        <li><a href="https://github.com/gungorMetehan/R-programlama-diline-giris" target="blank">Düzenleme Önerebilirsiniz <i class="fa-brands fa-github fa-lg"></i></a></li>
+    edit: https://github.com/USERNAME/REPO/edit/BRANCH/%s
+    download: []
+
+

@@ -1,0 +1,154 @@
+# Veri Türleri
+
+## Veri Türleri
+
+R’da temel olarak altı tür veri vardır. Bunlar: mantıksal değer (logical), sayısal değer (numeric), tam sayı (integer), karmaşık sayı (complex), karakter (character) ve ham veridir (raw). 
+Mantıksal değerler, aynı zamanda Boolean veri olarak bilinir ve iki değeri vardır: <code>TRUE</code> (DOĞRU) ve <code>FALSE</code> (YANLIŞ).
+
+```{r}
+mantik_data1 <- TRUE
+mantik_data1
+class(mantik_data1)
+
+mantik_data2 <- F
+mantik_data2
+class(mantik_data2)
+```
+
+Yukarıdaki örnekten görüldüğü üzere <code>FALSE</code> yerine kısaltması olan <code>F</code> harfi de kullanılabilmektedir. Benzer şekilde <code>T</code> harfi <code>TRUE</code> yerine kullanılabilirdir.
+Sayısal değerler, tüm gerçek (reel) sayılar için kullanılabilir.
+
+```{r}
+yazili_not <- 85
+sinif_ortalamasi <- 70.8
+yazili_not
+sinif_ortalamasi
+class(yazili_not)
+class(sinif_ortalamasi)
+```
+
+Tam sayıları spesifik olarak belirtmek için tam sayı veri türü kullanılır. Ancak bilindiği üzere tam sayılar da gerçek sayıdır. Bu nedenle R'da özellikle tam sayıları ifade etmek için <code>L</code> harfi kullanılır.
+
+```{r}
+kilo <- 68L
+kilo
+class(kilo)
+```
+
+Karmaşık veriler, karmaşık (kompleks) sayılar içindir. Karmaşık sayıların imajiner z = a + bi şeklinde ifade edilir ve burada a gerçel (reel) kısmı, b ise imajiner (sanal) kısmı ifade eder.
+
+```{r}
+kompleks <- 5+2i
+kompleks
+class(kompleks)
+```
+
+Karakter verileri, character ya da string tipinde olabilir. Örneğin, 'm' harfi bir karakter iken 'matematik' bir string ifadedir. İkisi de karakter verisidir. R'da genellikle ' ' karakterler için, " " ise string veriler için kullanılır.
+
+```{r}
+karakter <- 'm'
+string_ornek <- "matematik"
+karakter
+string_ornek
+class(karakter)
+class(string_ornek)
+```
+
+Görüldüğü üzere hem `karakter` hem de `string_ornek` karakter sınıfında yer almaktadır. Kullanılacak `'` ya da `"` noktalama işaretleri / sembolleri yapıyı değiştirmemektedir. İkisi de birbirinin yerine kullanılabilir.
+
+Ham veriler, değerleri raw byte olarak ifade etmek için kullanılır. Bunun için aşağıdaki iki fonksiyondan yararlanılır.
+
+<li><code>charToRaw()</code> - karakter datasını raw dataya çevirir.</li>
+<li><code>rawToChar()</code> - raw datayı karakter datasına çevirir.</li>
+
+```{r}
+ornek_rawdata <- charToRaw("Metehan Güngör")
+ornek_rawdata
+class(ornek_rawdata)
+
+ornek_karakter <- rawToChar(ornek_rawdata)
+ornek_karakter
+class(ornek_karakter)
+```
+
+## Alıştırmalar `r fontawesome::fa('pencil',fill='gray')`
+
+**Alıştırma 1**
+İçinde tek bir `FALSE` değeri bulunan, adı `FF` olan bir nesne oluşturunuz. Nesnenin sınıfının (türünün) logical olup olmadığını `class()` fonksiyonu ile kontrol ediniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+FF <- FALSE
+class(FF)
+```
+
+</details>
+
+**Alıştırma 2**
+Tek elemanı 75,5 olan `nesne` isimli bir nesne oluşturunuz. Nesnenin sınıfının (türünün) numeric olup olmadığını `class()` fonksiyonu ile kontrol ediniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+nesne <- 75.5
+class(nesne)
+```
+
+</details>
+
+**Alıştırma 3**
+`boy` isimli bir nesne oluşturunuz. Bu nesnenin tek elemanı 180 olsun. Nesnenin sınıfının (türünün) integer olup olmadığını `class()` fonksiyonu ile kontrol ediniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+boy <- 180
+class(boy)
+```
+
+</details>
+
+**Alıştırma 4**
+Gerçel (reel) kısmı 2, imajiner (sanal) kısmı ise 3 olan bir karmaşık sayıyı içeren, ismi `komp` olan bir nesne oluşturunuz. Nesnenin sınıfının (türünün) complex olup olmadığını `class()` fonksiyonu ile kontrol ediniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+komp <- 2 + 3i
+class(komp)
+```
+
+</details>
+
+**Alıştırma 5**
+Tek elemanı "Türkiye" olan, `TR` isimli bir nesne oluşturunuz. Nesnenin sınıfının (türünün) character olup olmadığını `class()` fonksiyonu ile kontrol ediniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+TR <- "Türkiye"
+class(TR)
+```
+
+</details>
+
+**Alıştırma 6**
+"Beyaz" kelimesini `charToRaw()` fonksiyonu ile raw data'ya çeviriniz. Bu datayı `B` isimli bir nesneye atayınız. Nesnenin sınıfının (türünün) raw olup olmadığını `class()` fonksiyonu ile kontrol ediniz. Elde ettiğiniz `B` nesnesini `rawToChar()` fonksiyonu ile tekrar karakter haline getiriniz. Yeni nesnenin sınıfının (türünün) character olup olmadığını `class()` fonksiyonu ile kontrol ediniz.
+
+<details>
+  <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
+
+```{r} 
+B <- charToRaw("Beyaz")
+class(B)
+C <- rawToChar(B)
+class(C)
+```
+
+</details>
