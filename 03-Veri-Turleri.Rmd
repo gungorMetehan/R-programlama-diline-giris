@@ -35,7 +35,7 @@ kilo
 class(kilo)
 ```
 
-Karmaşık veriler, karmaşık (kompleks) sayılar içindir. Karmaşık sayıların imajiner z = a + bi şeklinde ifade edilir ve burada a gerçel (reel) kısmı, b ise imajiner (sanal) kısmı ifade eder.
+Karmaşık veriler, karmaşık (kompleks) sayılar içindir. Gerçel ve sanal kısımlardan oluşan karmaşık sayılar $z = a + bi$ şeklinde ifade edilir ve burada a gerçel (reel) kısmı, b ise imajiner (sanal) kısmı ifade eder.
 
 ```{r}
 kompleks <- 5+2i
