@@ -43,7 +43,7 @@ typeof(notlar)
 
 ## Faktörler (factors)
 
-Faktörler kategorik/kesikli/süreksiz veriler için kullanılır. Faktör nesnelerinin aldığı değerlere düzey (level) denir. Karakter veri türü çoğunlukla grafiklerin adlandırılması, satır veya sütun adlarının verilmesi gibi amaçlar ile kullanılırken, faktörler veri setindeki süreksiz değişkenleri (variables) gösterir. Faktörler analizlerde grupları gösterir. Faktörler karakter veri türünde ya da sayısal veri türünde olabilir.
+Faktörler kategorik/kesikli/süreksiz veriler için kullanılır. Faktör nesnelerinin aldığı değerlere düzey (level) denir. Karakter veri türü çoğunlukla grafiklerin adlandırılması, satır veya sütun adlarının verilmesi gibi amaçlar ile kullanılırken, faktörler veri setindeki süreksiz değişkenleri (variables) gösterir. Faktörler analizlerde grupları gösterir. Faktörler karakter ya da sayısal veri türünde olabilir.
 
 ```{r}
 # bir karakter vektörü oluşturma ve bunu faktöre dönüştürme
@@ -238,14 +238,14 @@ head(airquality, 10)
 
 #### verbal
 
-`verbal` veri seti, Vansteelandt’ın (2000) tarafından tez çalışması için toplanmıştır. Bu veri setinin adı ‘Verbal Aggression’dır. Verbal Aggression veri seti “difR” ve “deltaPlotR” paketlerinde hazır olarak sunulmaktadır. Bu veri seti 243 kadın ve 73 erkeğin yanıtlarından (toplam 316 kişi) oluşmaktadır. Veri seti bir matris şeklindedir, 316 satır ve 26 sütundan oluşmaktadır. Sütunlarda 24 adet maddeden alınan puanlar, toplam puanın alındığı ‘Anger’ ve grup değişkeni olan ‘Gender’ yer almaktadır.
+`verbal` veri seti, Vansteelandt (2000) tarafından tez çalışması için toplanmıştır. Bu veri setinin adı ‘Verbal Aggression’dır. Verbal Aggression veri seti “difR” ve “deltaPlotR” paketlerinde hazır olarak sunulmaktadır. Bu veri seti 243 kadın ve 73 erkeğin yanıtlarından (toplam 316 kişi) oluşmaktadır. Veri seti bir matris şeklindedir, 316 satır ve 26 sütundan oluşmaktadır. Sütunlarda 24 adet maddeden alınan puanlar, toplam puanın alındığı ‘Anger’ ve grup değişkeni olan ‘Gender’ yer almaktadır.
 Maddeler şu ifadeler ile açıklanmıştır.
 <li>S1: A bus fails to stop for me.</li>
 <li>S2: I miss a train because a clerk gave me faulty information.</li>
 <li>S3: The grocery store closes just as I am about to enter.</li>
 <li>S4: The operator disconnects me when I had used up my last 10 cents for a call.</li>
 Her madde S harfi ile başlamaktadır. S harfinin yanında 1’den 4’e kadar bir ifadeler gelmektedir. Ardından Want (yapmak isterim) ve Do (yaparım) şeklindeki karşılık verme ifadeleri gelmektedir. Son olarak ise olası tepkiler listelenmektedir: Curse, Scold ve Shout.
-Örneğin, S2WantCurse maddesinden 1 puan alan bir birey, “bir görevli kendisine hatalı bilgi verdiği için treni kaçırdığında lanetlemek istemektedir.” şeklinde bir yorum yapılabilir. Bu örnek veri seti sıklıkla psikometri alanında yaygın bir şekilde kullanılan DMF analizlerini örneklemek için kullanılabilir. Veri setine ulaşmak için öncelikle `install.packages("difR")` komutu ile paket indirilmelidir. Ardından veri setinin ilk 5 satırı şu şekilde incelenebilir:
+Örneğin, S2WantCurse maddesinden 1 puan alan bir birey, “bir görevli kendisine hatalı bilgi verdiği için treni kaçırdığında lanetlemek istemektedir.” şeklinde bir yorum yapılabilir. Bu örnek veri seti sıklıkla psikometri alanında yaygın bir şekilde kullanılan DMF (değişen madde fonksiyonu) analizlerini örneklemek için kullanılabilir. Veri setine ulaşmak için öncelikle `install.packages("difR")` komutu ile paket indirilmelidir. Ardından veri setinin ilk 5 satırı şu şekilde incelenebilir:
 
 ```{r}
 library(difR)
