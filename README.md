@@ -4,7 +4,7 @@
 
 ## İçindekiler (Contents)
 
-[**0. Sunuş**](https://kitap.epodder.org/r-programlama-dili/index.html#sunu%C5%9F)
+[**Sunuş**](https://kitap.epodder.org/r-programlama-dili/index.html#sunu%C5%9F)
 
 + [Yazar Hakkında](https://kitap.epodder.org/r-programlama-dili/index.html#yazar-hakk%C4%B1nda)
 + [Açıklamalar](https://kitap.epodder.org/r-programlama-dili/index.html#a%C3%A7%C4%B1klamalar)
@@ -99,7 +99,7 @@
 + [Çevrim İçi Kaynaklar](https://kitap.epodder.org/r-programlama-dili/11-Okuma-Onerileri.html#%C3%A7evrim-i%C3%A7i-kaynaklar)
 + [Basılı Kaynaklar](https://kitap.epodder.org/r-programlama-dili/11-Okuma-Onerileri.html#bas%C4%B1l%C4%B1-kaynaklar)
 
-[**12. KAYNAKLAR**](https://kitap.epodder.org/r-programlama-dili/12-Kaynaklar.html)
+[**KAYNAKLAR**](https://kitap.epodder.org/r-programlama-dili/12-Kaynaklar.html)
 
 ## Atıf (Citation)
 Güngör, M. (2024). _R programlama diline giriş_ [Introduction to R programming language]. EPODDER. https://kitap.epodder.org/r-programlama-dili/
