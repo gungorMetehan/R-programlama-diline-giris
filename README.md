@@ -113,4 +113,4 @@ Güngör, M. (2024). _R programlama diline giriş_ [Introduction to R programmin
 | **Versiyon** | **Açıklama** | **Tarih** |
 |---|---|---|
 | V1 | İlk yayım. | 15.06.2024 |
-| V2 | 2. Bölüm'de (Giriş) noktalama işaretleri ve yazım hataları düzenlendi. 3.1. ve 3.2. Bölüm'deki yazım hataları düzenlendi. | XX.XX.XXXX |
+| V2 | 2. Bölüm'de (Giriş) noktalama işaretleri ve yazım hataları düzenlendi. 3.1. ve 3.2. Bölüm'deki yazım hataları düzenlendi. 4.2 ve 4.6.1. Bölüm'deki yazım hataları düzenlendi. | XX.XX.XXXX |
