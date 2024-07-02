@@ -161,7 +161,7 @@ vektor1^vektor2
 sqrt(vektor1)
 sqrt((vektor1*2)^3) - vektor2
 
-# eleman sayıları eşit olmayan iki vektörün çarpımını inceleyeniz.
+# eleman sayıları eşit olmayan iki vektörün çarpımını inceleyiniz.
 
 vektor3 <- c(1, 2, 3, 4)
 vektor4 <- c(5, 6)
@@ -192,7 +192,7 @@ cinsiyet2
 class(cinsiyet2)
 ```
 
-Faktör düzeyleri sıralanmak istendiğinde <code>ordered()</code> fonksiyonundan faydalanılır.
+Faktör düzeyleri sıralanmak istendiğinde <code>ordered()</code> fonksiyonu kullanılabilir.
 
 ```{r}
 finalNotlari <- c("AA", "BB", "BA", "AA", "CC", "CC", "BA", "BB", "CB", "AA", "BA", "BB")
@@ -352,7 +352,7 @@ m1 <- matrix(1:15, 3, 5)
 colSums(m1)
 
 # satır toplamları
-rowSums
+rowSums(m1)
 
 # sütun ortalamaları
 colMeans(m1)
@@ -516,7 +516,7 @@ data1
 class(data1)
 ```
 
-Farklı uzunluklardaki vektörler ile veri setleri oluşturulabilir. Ancak bu noktada uzun vektörün uzunluğunun diğer (kısa) vektörün uzunluğunun tam katı olması gerekir. Aksi halde hata mesajı alınacaktır. 
+Farklı uzunluklardaki vektörler ile data frame'ler oluşturulabilir. Ancak bu noktada uzun vektörün uzunluğunun diğer (kısa) vektörün uzunluğunun tam katı olması gerekir. Aksi halde hata mesajı alınacaktır. 
 
 ```{r, error = TRUE}
 x <- 100:103
@@ -647,8 +647,6 @@ attributes(mtcars)
 summary(mtcars)
 table(is.na(mtcars))
 ```
-
-Veri yapıları birbirine dönüştürülebilir.
 
 Bazen veri yapılarının birbirine dönüştürülmesi gerekebilir. Örneğin, bilgisayardaki bir Excel dosyası R'a okutturulduğunda genellikle bir data frame elde edilir. Ancak bu data frame aslında yalnızca sayısal karakterler içeren bir matristir ve matrislerde aritmetik işlemler gerçekleştirilmesi gerekiyordur. Bu nedenle data frame'in öncelikle matrise çevrilmesi gerekir. Bunun için <code>as.matrix()</code> fonksiyonu kullanılır.
 
