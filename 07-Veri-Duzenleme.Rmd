@@ -1,6 +1,6 @@
 # Veri Düzenleme
 
-Veri düzenleme, başlı başına üzerinde uzmanlaşılması gereken ayrı bir konudur. R’a aktarılan veriler ile analizler gerçekleştirmeden önce genellikle verinin düzenlenmesi gerekir. Bu düzenleme (manipülasyon) pek çok anlama gelebilir. Bu aşamada veri seti alt veri setlerine ayrılabilir, verinin bir bölümü seçilebilir, veri başka veriler ile birleştirilebilir… Veri düzenleme, veri analizi ve görselleştirme için önemli bir konu olduğu için pek çok kişi bu konuya kafa yormuştur ve R’da veri düzenleme yaparken kullanılmak üzere pek çok paket geliştirilmiştir. Bu bölümde Wickham, François, Henry, Müller ve Vaughan (2023) tarafından geliştirilmiş olan `dplyr` paketindeki fonksiyonlardan yararlanılacaktır. Bu kapsamlı ve oldukça kullanışlı paket hakkında detaylı bilgiye ulaşmak için [buraya](https://dplyr.tidyverse.org/) tıklayabilirsiniz. 
+R’a aktarılan veriler ile analizler gerçekleştirmeden önce genellikle verinin düzenlenmesi gerekir. Bu düzenleme (manipülasyon) pek çok anlama gelebilir. Bu aşamada veri seti alt veri setlerine ayrılabilir, verinin bir bölümü seçilebilir, veri başka veriler ile birleştirilebilir… Veri düzenleme, veri analizi ve görselleştirme için önemli bir konu olduğu için pek çok kişi bu konuya kafa yormuştur ve R’da veri düzenleme yaparken kullanılmak üzere pek çok paket geliştirilmiştir. Bu bölümde Wickham, François, Henry, Müller ve Vaughan (2023) tarafından geliştirilmiş olan `dplyr` paketindeki fonksiyonlardan yararlanılacaktır. Bu kapsamlı ve oldukça kullanışlı paket hakkında detaylı bilgiye ulaşmak için [buraya](https://dplyr.tidyverse.org/) tıklayabilirsiniz. 
 Paketi indirmek için öncelikle `install.packages("dplyr")` komutunu çalıştırıyoruz, ardından aşağıdaki komut ile paketi çalışır hale getiriyoruz.
 
 ```{r message=FALSE}
@@ -52,6 +52,8 @@ TR_stu2 <- TR_stu |>
   filter(metropolitan == 1)
 ```
 
+Bu haliyle artık `TR_stu2` isimli nesne yalnızca büyükşehirlerin verilerinden oluşan yeni bir data frame'dir.
+
 ## filter() Fonksiyonu
 
 `filter()` fonksiyonu adından da anlaşıldığı üzere filtreleme yapmak için kullanılır. Örneğin;
@@ -82,7 +84,7 @@ Burada `NUTS_level1` (istatistiki bölge birimleri sınıflandırması – düze
 
 ## arrange() Fonksiyonu
 
-`arrange()` fonksiyonu ile satırların sıralaması düzenlenebilir. Örneğin, `TR_stu` isimli veri seti `gadm_L3number` değişkenine göre sıralanmıştır. Oysa biz bunu plakalara (`plate_number`) sıralı halde görmek isteyebilir, bu şekilde düzenlenmiş bir veri seti ile çalışmak isteyebiliriz. Bunun için;
+`arrange()` fonksiyonu ile satırların sıralaması düzenlenebilir. Örneğin, `TR_stu` isimli veri seti `gadm_L3number` değişkenine göre sıralanmıştır. Oysa biz bunu plakalara (`plate_number`) göre sıralı halde görmek isteyebilir, bu şekilde düzenlenmiş bir veri seti ile çalışmak isteyebiliriz. Bunun için;
 
 ```{r}
 TR_stu |>
@@ -131,7 +133,10 @@ TR_stu3 <- TR_stu |>
 ```
 
 Bu veri setinde aslında bu toplam değer vardır. İşlemin doğru olup olmadığını anlamak için `identical()` fonksiyonu ile iki vektörün eş olup olmadığını test edebiliriz.
-`identical(TR_stu3$toplam_devlet_lise, TR_stu$student_s_high_total_21_22)`
+```{r}
+identical(TR_stu3$toplam_devlet_lise, TR_stu$student_s_high_total_21_22)
+```
+
 Görüldüğü üzere (`TRUE`) `TR_stu3`’te yer alan yeni değişken ile uygulama verisinde yer alan değişken birebir aynıdır.
 
 `mutate()` fonksiyonu ile ilgilendiğimiz değişkenin veri setindeki pozisyonunu da değiştirebiliriz. Bunun için `.before` ve `.after` argümanları kullanılır.
@@ -180,7 +185,7 @@ TR_stu |>
 
 İki değişken arasındaki değişkenler haricindeki diğer tüm değişkenleri seçmek için ise yukarıdaki satır komutlarını kullanabiliriz (`!` işareti R’da “değil” anlamında kullanılmaktadır).
 
-`select()` fonksiyonu `where()` fonksiyonu ile birlikte kullanılan tek tipteki değişkenler seçilebilir.
+`select()` fonksiyonu `where()` fonksiyonu ile birlikte kullanılarak aynı tipteki değişkenler seçilebilir.
 
 ```{r}
 TR_stu |>
@@ -487,7 +492,7 @@ EF_team_stats |>
 </details>
 
 **Alıştırma 4**
-Alıştırma 1'de içe aktarılan `EF_team_stats` veri setindeki `total_kills` değerlerinin `total_deaths` değerlerinin bölümünden yeni bir değişken oluşturunuz, bu değişkene `ratio` ismini veriniz (Bunun için `mutate` fonksiyonundan yararlanınız). Sonrasında ilk 5 satırı `head()` fonksiyonu yardımıyla yazdırınız.
+Alıştırma 1'de içe aktarılan `EF_team_stats` veri setindeki `total_kills` değerlerinin `total_deaths` değerlerine bölümünden yeni bir değişken oluşturunuz, bu değişkene `ratio` ismini veriniz (Bunun için `mutate()` fonksiyonundan yararlanınız). Sonrasında ilk 5 satırı `head()` fonksiyonu yardımıyla yazdırınız.
 
 <details>
   <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
