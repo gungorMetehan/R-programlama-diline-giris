@@ -21,7 +21,7 @@ print("Yeterli")
 
 ### else() Koşul İfadesi
 
-<code>else()</code> koşul ifadesi <code>if()</code> koşuk ifadesindeki koşullar sağlanmadığı durumda ortaya çıkacak alternatifi belirlemek amacıyla kullanılır.
+<code>else()</code> koşul ifadesi <code>if()</code> koşul ifadesindeki koşullar sağlanmadığı durumda ortaya çıkacak alternatifi belirlemek amacıyla kullanılır.
 
 ```{r}
 deger <- 175 
@@ -31,6 +31,8 @@ print("Yeterli")
 print("Yetersiz") 
 }
 ```
+
+Yukarıdaki örnekten görüldüğü üzere `deger` isimli nesnede saklanan değer 175 olduğu için 'Yetersiz' çıktısı alınmıştır. Bu çıktının alınmasının nedeni `if()` için verilen koşulun sağlanamamasıdır.
 
 ### else if() Koşul İfadesi
 
@@ -51,7 +53,7 @@ if(p1 >= 0.80) {
   }
 ```
 
-<code>if()</code> koşul ifadeleri vektörlerde kullanılamaz. Yukarıdaki örneğe benzer şekilde, birden fazla madde (soru) için madde güçlük indeksleri verildiğinde her biri için yorum yapmak istendiğinde <code>ifelse()</code> fonksiyonu kullanılabilir.
+<code>if()</code> koşul ifadeleri vektörlerde kullanılamaz. Yukarıdaki örneğe benzer şekilde, birden fazla madde (soru) için madde güçlük indeksleri verildiğinde her biri için yorum yapmak istendiğinde <code>else if()</code> fonksiyonu kullanılabilir.
 
 ### ifelse() Koşul İfadesi
 
@@ -96,7 +98,7 @@ for (i in x) {
   }
 ```
 
-Yukarıdaki örnekte `x` vektörünün her elemanının karesinin alınıp tek tek gösterilmesi (`print()`) istenmiştir. `for()` fonksiyonunun içindeki i indeksi göstermektedir ve i'nin sırasıyla 1'den 20'ye kadar değer alması istenmiştir.
+Yukarıdaki örnekte `x` vektörünün her elemanının karesinin alınıp tek tek gösterilmesi (`print()`) istenmiştir. `for()` fonksiyonunun içindeki i, indeksi göstermektedir ve i'nin sırasıyla 1'den 20'ye kadar değer alması istenmiştir.
 
 ```{r}
 liste <- list(1:6, letters[1:4], c("AA", "BA", "BB", "CB", "CC")) 
@@ -161,7 +163,7 @@ for (j in 1:ncol(yeniVeri2)) {
 yeniVeri2
 ```
 
-Yukarıdaki for döngüsünün ne yaptığını anlamaya çalışalım. j indeksi (illa i olmak zorunda değil) 1 ile 3 arasında dönecektir. Her seferinde yeniVeri'nin j'nci sütunundaki değerlerin karesini alacak ve bunu (3+j)'nci sütun olarak ekleyecektir. Böylelikle data frame'e 3 yeni sütun eklenecek ve data frame 6 sütunlu olacaktır.
+Yukarıdaki for döngüsünün ne yaptığını anlamaya çalışalım. j indeksi (illa i olmak zorunda değil) 1 ile 3 arasında dönecektir. Her seferinde `yeniVeri`nin j'nci sütunundaki değerlerin karesini alacak ve bunu (3+j)'nci sütun olarak ekleyecektir. Böylelikle data frame'e 3 yeni sütun eklenecek ve data frame 6 sütunlu olacaktır.
 
 Bir döngüde çeşitli fonksiyonlar kullanılabilir. Örneğin bir başka geliştiricinin hazırladığı bir paketteki fonksiyonu kullanarak bir problemi çözmeye çalışalım. Aşağıdaki örnekte öncelikle 3 farklı test verisi oluşturulmuş (hepsinde 10 maddeye yanıt veren öğrenciler bulunmakta, 1'ler doğru, 0'lar yanlış yanıtı ifade etmekte) ve sonrasında `psychometric` paketi içindeki bir fonksiyondan (`item.exam()`) yararlanılarak eldeki farklı veri setlerindeki maddelerin madde güçlük indeksleri hesaplanmıştır.
 
@@ -276,10 +278,6 @@ kupFonk2 <- function(a) {
   } 
 kupFonk2(c(1, 2, 3, 4, 5))
 ```
-
-Kendi yazdığımız fonksiyon içinde, başka geliştiricilerin hazırladığı fonksiyonları da kullanabiliriz. Örneğin;
-
-
 
 ## apply() Ailesi
 
