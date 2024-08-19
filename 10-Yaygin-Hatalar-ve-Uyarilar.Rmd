@@ -89,7 +89,7 @@ rnorm(100, ss = 5)
 R'da bir paketin (package) kullanılabilmesi için önce indirilmesi, sonra çalıştırılması gerekir. İndirmek için `install.packages("paketAdi")` fonksiyonu çalıştırılmalıdır. Bu işlem gerçekleştirilmeden, doğrudan library(paketAdi) yazılır ise 'there is no package called 'paketAdi'' şeklinde bir hata alınacaktır. Bu hata alındığında öncelikle paketin indirilmesi gerektiği fark edilmelidir.
 
 ```{r error = TRUE}
-library(ltm)
+library(farkliBirPaket)
 ```
 
 ## Uyarılar (Warnings)
