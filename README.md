@@ -11,11 +11,11 @@
   
 [**1. R ve R Studio**](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html)
 
-+ [R Nedir?](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#r-nedir)
-+ [Neden R?](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#neden-r)
-+ [R’ı İndirme ve Kurma](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#r%C4%B1-indirme-ve-kurma)
-+ [RStudio Nedir?](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#rstudio-nedir)
-+ [RStudio’yu İndirme ve Kurma](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#rstudioyu-indirme-ve-kurma)
++ [R Nedir? [What is R?]](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#r-nedir)
++ [Neden R? [Why R?]](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#neden-r)
++ [R’ı İndirme ve Kurma [Downloading and Installing R]](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#r%C4%B1-indirme-ve-kurma)
++ [RStudio Nedir? [What is RStudio?]](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#rstudio-nedir)
++ [RStudio’yu İndirme ve Kurma [Downloading and Installing RStudio]](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#rstudioyu-indirme-ve-kurma)
 
 [**2. Giriş**](https://kitap.epodder.org/r-programlama-dili/02-Giris.html)
 
