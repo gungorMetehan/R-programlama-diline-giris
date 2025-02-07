@@ -17,21 +17,21 @@
 + [RStudio Nedir? [What is RStudio?]](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#rstudio-nedir)
 + [RStudio’yu İndirme ve Kurma [Downloading and Installing RStudio]](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#rstudioyu-indirme-ve-kurma)
 
-[**2. Giriş**](https://kitap.epodder.org/r-programlama-dili/02-Giris.html)
+[**2. Giriş [Introduction]**](https://kitap.epodder.org/r-programlama-dili/02-Giris.html)
 
-[**3. Veri Türleri**](https://kitap.epodder.org/r-programlama-dili/03-Veri-Turleri.html)
+[**3. Veri Türleri [Data Types]**](https://kitap.epodder.org/r-programlama-dili/03-Veri-Turleri.html)
 
-+ [Veri Türleri](https://kitap.epodder.org/r-programlama-dili/03-Veri-Turleri.html#veri-t%C3%BCrleri-1)
-+ [Alıştırmalar](https://kitap.epodder.org/r-programlama-dili/03-Veri-Turleri.html#al%C4%B1%C5%9Ft%C4%B1rmalar)
++ [Veri Türleri [Data Types]](https://kitap.epodder.org/r-programlama-dili/03-Veri-Turleri.html#veri-t%C3%BCrleri-1)
++ [Alıştırmalar [Exercises]](https://kitap.epodder.org/r-programlama-dili/03-Veri-Turleri.html#al%C4%B1%C5%9Ft%C4%B1rmalar)
 
-[**4. Veri Yapıları**](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html)
+[**4. Veri Yapıları [Data Structures]**](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html)
 
 + [Vektörler (vectors)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#vekt%C3%B6rler-vectors)
 + [Faktörler (factors)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#fakt%C3%B6rler-factors)
 + [Matrisler (matrices)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#matrisler-matrices)
 + [Diziler (arrays)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#diziler-arrays)
 + [Listeler (lists)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#listeler-lists)
-+ [Data Frame’ler](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#data-frameler)
++ [Data Frame’ler (data frames)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#data-frameler)
 + [Veri Yapıları Arasında Dönüşüm](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#veri-yap%C4%B1lar%C4%B1-aras%C4%B1nda-d%C3%B6n%C3%BC%C5%9F%C3%BCm)
 + [Alıştırmalar](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#al%C4%B1%C5%9Ft%C4%B1rmalar-1)
 
@@ -47,9 +47,9 @@
 
 [**6. Veriyi İçe ve Dışa Aktarma**](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html)
 
-+ [İçe Aktarma](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html#i%C3%A7e-aktarma)
-+ [Dışa Aktarma](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html#d%C4%B1%C5%9Fa-aktarma)
-+ [Alıştırmalar](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html#al%C4%B1%C5%9Ft%C4%B1rmalar-3)
++ [İçe Aktarma [Importing]](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html#i%C3%A7e-aktarma)
++ [Dışa Aktarma [Exporting]](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html#d%C4%B1%C5%9Fa-aktarma)
++ [Alıştırmalar [Exercises]](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html#al%C4%B1%C5%9Ft%C4%B1rmalar-3)
 
 [**7. Veri Düzenleme**](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html)
 
