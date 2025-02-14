@@ -26,14 +26,14 @@
 
 [**4. Veri Yapıları [Data Structures]**](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html)
 
-+ [Vektörler (vectors)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#vekt%C3%B6rler-vectors)
-+ [Faktörler (factors)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#fakt%C3%B6rler-factors)
-+ [Matrisler (matrices)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#matrisler-matrices)
-+ [Diziler (arrays)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#diziler-arrays)
-+ [Listeler (lists)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#listeler-lists)
-+ [Data Frame’ler (data frames)](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#data-frameler)
-+ [Veri Yapıları Arasında Dönüşüm](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#veri-yap%C4%B1lar%C4%B1-aras%C4%B1nda-d%C3%B6n%C3%BC%C5%9F%C3%BCm)
-+ [Alıştırmalar](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#al%C4%B1%C5%9Ft%C4%B1rmalar-1)
++ [Vektörler [Vectors]](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#vekt%C3%B6rler-vectors)
++ [Faktörler [Factors]](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#fakt%C3%B6rler-factors)
++ [Matrisler [Matrices]](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#matrisler-matrices)
++ [Diziler [Arrays]](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#diziler-arrays)
++ [Listeler [Lists]](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#listeler-lists)
++ [Data Frame’ler [Data Frames]](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#data-frameler)
++ [Veri Yapıları Arasında Dönüşüm [Data Structure Conversion]](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#veri-yap%C4%B1lar%C4%B1-aras%C4%B1nda-d%C3%B6n%C3%BC%C5%9F%C3%BCm)
++ [Alıştırmalar [Exercises]](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#al%C4%B1%C5%9Ft%C4%B1rmalar-1)
 
 [**5. Veri Yapılarıyla İşlemler**](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html)
 
@@ -45,13 +45,13 @@
 + [Data Frame’lerde İşlemler](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#data-framelerde-i%C5%9Flemler)
 + [Alıştırmalar](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#al%C4%B1%C5%9Ft%C4%B1rmalar-2)
 
-[**6. Veriyi İçe ve Dışa Aktarma**](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html)
+[**6. Veriyi İçe ve Dışa Aktarma [Importing and Exporting Data]**](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html)
 
 + [İçe Aktarma [Importing]](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html#i%C3%A7e-aktarma)
 + [Dışa Aktarma [Exporting]](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html#d%C4%B1%C5%9Fa-aktarma)
 + [Alıştırmalar [Exercises]](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html#al%C4%B1%C5%9Ft%C4%B1rmalar-3)
 
-[**7. Veri Düzenleme**](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html)
+[**7. Veri Düzenleme [Data Manipulation]**](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html)
 
 + [filter() Fonksiyonu](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#filter-fonksiyonu)
 + [arrange() Fonksiyonu](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#arrange-fonksiyonu)
@@ -64,16 +64,16 @@
 + [slice_*() Fonksiyonları](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#slice_-fonksiyonlar%C4%B1)
 + [Pipe (|>) Bağlantı Operatörü](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#pipe-ba%C4%9Flant%C4%B1-operat%C3%B6r%C3%BC)
 + [Veri Setlerini Birleştirme (Join Fonksiyonları)](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#veri-setlerini-birle%C5%9Ftirme-join-fonksiyonlar%C4%B1)
-+ [Alıştırmalar](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#al%C4%B1%C5%9Ft%C4%B1rmalar-4)
++ [Alıştırmalar [Exercises]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#al%C4%B1%C5%9Ft%C4%B1rmalar-4)
 
-[**8. Koşul İfadeleri, Döngüler ve Fonksiyonlar**](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html)
+[**8. Koşul İfadeleri, Döngüler ve Fonksiyonlar [Conditional Statements, Loops and Functions]**](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html)
 
-+ [Koşul İfadeleri](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#ko%C5%9Ful-ifadeleri)
-+ [Döngüler](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#d%C3%B6ng%C3%BCler)
-+ [Temel Fonksiyon Yazımı](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#temel-fonksiyon-yaz%C4%B1m%C4%B1)
-+ [apply() Ailesi](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#apply-ailesi)
-+ [Bazı Yararlı Fonksiyonlar](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#baz%C4%B1-yararl%C4%B1-fonksiyonlar)
-+ [Alıştırmalar](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#al%C4%B1%C5%9Ft%C4%B1rmalar-5)
++ [Koşul İfadeleri [Conditional Statements]](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#ko%C5%9Ful-ifadeleri)
++ [Döngüler [Loops]](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#d%C3%B6ng%C3%BCler)
++ [Temel Fonksiyon Yazımı [Writing Basic Functions]](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#temel-fonksiyon-yaz%C4%B1m%C4%B1)
++ [apply() Ailesi [apply() Family]](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#apply-ailesi)
++ [Bazı Yararlı Fonksiyonlar [Some Useful Functions]](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#baz%C4%B1-yararl%C4%B1-fonksiyonlar)
++ [Alıştırmalar [Exercises]](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html#al%C4%B1%C5%9Ft%C4%B1rmalar-5)
 
 [**9. Basit Veri Görselleştirme**](https://kitap.epodder.org/r-programlama-dili/09-Basit-Veri-Gorsellestirme.html)
 
