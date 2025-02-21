@@ -89,10 +89,10 @@
 + [Grafik Alanının Çevresi](https://kitap.epodder.org/r-programlama-dili/09-Basit-Veri-Gorsellestirme.html#grafik-alan%C4%B1n%C4%B1n-%C3%A7evresi)
 + [Alıştırmalar](https://kitap.epodder.org/r-programlama-dili/09-Basit-Veri-Gorsellestirme.html#al%C4%B1%C5%9Ft%C4%B1rmalar-6)
 
-[**10. Yaygın Hatalar ve Uyarılar**](https://kitap.epodder.org/r-programlama-dili/10-Yaygin-Hatalar-ve-Uyarilar.html)
+[**10. Yaygın Hatalar ve Uyarılar [Common Errors and Warnings]**](https://kitap.epodder.org/r-programlama-dili/10-Yaygin-Hatalar-ve-Uyarilar.html)
 
-+ [Hatalar (errors)](https://kitap.epodder.org/r-programlama-dili/10-Yaygin-Hatalar-ve-Uyarilar.html#hatalar-errors)
-+ [Uyarılar (warnings)](https://kitap.epodder.org/r-programlama-dili/10-Yaygin-Hatalar-ve-Uyarilar.html#uyar%C4%B1lar-warnings)
++ [Hatalar [Errors]](https://kitap.epodder.org/r-programlama-dili/10-Yaygin-Hatalar-ve-Uyarilar.html#hatalar-errors)
++ [Uyarılar [Warnings]](https://kitap.epodder.org/r-programlama-dili/10-Yaygin-Hatalar-ve-Uyarilar.html#uyar%C4%B1lar-warnings)
 
 [**11. Okuma Önerileri**](https://kitap.epodder.org/r-programlama-dili/11-Okuma-Onerileri.html)
 
