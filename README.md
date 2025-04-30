@@ -94,12 +94,12 @@
 + [Hatalar [Errors]](https://kitap.epodder.org/r-programlama-dili/10-Yaygin-Hatalar-ve-Uyarilar.html#hatalar-errors)
 + [Uyarılar [Warnings]](https://kitap.epodder.org/r-programlama-dili/10-Yaygin-Hatalar-ve-Uyarilar.html#uyar%C4%B1lar-warnings)
 
-[**11. Okuma Önerileri**](https://kitap.epodder.org/r-programlama-dili/11-Okuma-Onerileri.html)
+[**11. Okuma Önerileri [Reading Recommendations]**](https://kitap.epodder.org/r-programlama-dili/11-Okuma-Onerileri.html)
 
-+ [Çevrim İçi Kaynaklar](https://kitap.epodder.org/r-programlama-dili/11-Okuma-Onerileri.html#%C3%A7evrim-i%C3%A7i-kaynaklar)
-+ [Basılı Kaynaklar](https://kitap.epodder.org/r-programlama-dili/11-Okuma-Onerileri.html#bas%C4%B1l%C4%B1-kaynaklar)
++ [Çevrim İçi Kaynaklar [Online Resources]](https://kitap.epodder.org/r-programlama-dili/11-Okuma-Onerileri.html#%C3%A7evrim-i%C3%A7i-kaynaklar)
++ [Basılı Kaynaklar [Printed Resources]](https://kitap.epodder.org/r-programlama-dili/11-Okuma-Onerileri.html#bas%C4%B1l%C4%B1-kaynaklar)
 
-[**KAYNAKLAR**](https://kitap.epodder.org/r-programlama-dili/12-Kaynaklar.html)
+[**KAYNAKLAR [REFERENCES]**](https://kitap.epodder.org/r-programlama-dili/12-Kaynaklar.html)
 
 ## Atıf (Citation)
 Güngör, M. (2024). _R programlama diline giriş_ [Introduction to R programming language]. EPODDER. https://kitap.epodder.org/r-programlama-dili/
