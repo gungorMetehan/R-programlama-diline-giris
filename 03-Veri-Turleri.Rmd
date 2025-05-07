@@ -106,7 +106,7 @@ class(nesne)
   <summary>Yanıt İçin Tıklayınız `r fontawesome::fa('circle-arrow-down',fill='gray')`</summary>
 
 ```{r} 
-boy <- 180
+boy <- 180L
 class(boy)
 ```
 
