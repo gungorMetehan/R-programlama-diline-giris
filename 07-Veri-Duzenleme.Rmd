@@ -84,7 +84,7 @@ Burada `NUTS_level1` (istatistiki bölge birimleri sınıflandırması – düze
 
 ## arrange() Fonksiyonu
 
-`arrange()` fonksiyonu ile satırların sıralaması düzenlenebilir. Örneğin, `TR_stu` isimli veri seti `gadm_L3number` değişkenine göre sıralanmıştır. Oysa biz bunu plakalara (`plate_number`) göre sıralı halde görmek isteyebilir, bu şekilde düzenlenmiş bir veri seti ile çalışmak isteyebiliriz. Bunun için;
+`arrange()` fonksiyonu ile satırların sıralaması düzenlenebilir. Örneğin, `TR_stu` isimli veri seti `gadm_L3number` değişkenine göre sıralanmıştır. Oysa biz bunu plakalara (`plate_number`) göre sıralanmış halde görmek isteyebilir, bu şekilde düzenlenmiş bir veri seti ile çalışmak isteyebiliriz. Bunun için;
 
 ```{r}
 TR_stu |>
