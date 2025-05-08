@@ -102,11 +102,7 @@
 [**KAYNAKLAR [REFERENCES]**](https://kitap.epodder.org/r-programlama-dili/12-Kaynaklar.html)
 
 ## Atıf (Citation)
-Güngör, M. (2024). _R programlama diline giriş_ [Introduction to R programming language]. EPODDER. https://kitap.epodder.org/r-programlama-dili/
-
-+ [<img src="https://github.com/jpswalsh/academicons/blob/master/svg/researchgate-square.svg" width="30" title="ResearchGate">](https://www.researchgate.net/publication/381441907_R_Programlama_Diline_Giris)
-+ [<img src="https://github.com/jpswalsh/academicons/blob/master/svg/google-scholar-square.svg" width="30" title="Google Scholar">](https://scholar.google.com/citations?view_op=view_citation&hl=tr&user=A2t06HsAAAAJ&citation_for_view=A2t06HsAAAAJ:Tyk-4Ss8FVUC)
-+ [<img src="https://github.com/jpswalsh/academicons/blob/master/svg/academia-square.svg" width="30" title="Academia">](https://www.academia.edu/121050961/R_Programlama_Diline_Giri%C5%9F)
+Güngör, M. (2024). _R programlama diline giriş_ [Introduction to R programming language]. EPODDER. https://kitap.epodder.org/r-programlama-dili/ [ [<img src="https://github.com/jpswalsh/academicons/blob/master/svg/researchgate-square.svg" width="15" title="ResearchGate">](https://www.researchgate.net/publication/381441907_R_Programlama_Diline_Giris) | [<img src="https://github.com/jpswalsh/academicons/blob/master/svg/google-scholar-square.svg" width="15" title="Google Scholar">](https://scholar.google.com/citations?view_op=view_citation&hl=tr&user=A2t06HsAAAAJ&citation_for_view=A2t06HsAAAAJ:Tyk-4Ss8FVUC) | [<img src="https://github.com/jpswalsh/academicons/blob/master/svg/academia-square.svg" width="15" title="Academia">](https://www.academia.edu/121050961/R_Programlama_Diline_Giri%C5%9F) ]
 
 ## Revizyon Tablosu (Revision Table)
 
