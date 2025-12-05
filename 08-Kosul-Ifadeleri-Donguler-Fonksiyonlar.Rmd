@@ -449,7 +449,7 @@ Sys.time()
 
 ### aggregate()
 
-aggregate() fonksiyonu veriyi alt veri setlerine göre gruplandırarak işlem yapma olanağı sağlar. Örnek için R'da bulunan `airquality` veri setini ele alalım. Bu veri setindeki `Ozone` ve `Temp` değişkenlerinin aylara (`Month`) göre ortalamalarını bulmak için aşağıdaki satır komutları kullanılır.
+<code>aggregate()</code> fonksiyonu veriyi alt veri setlerine göre gruplandırarak işlem yapma olanağı sağlar. Örnek için R'da bulunan `airquality` veri setini ele alalım. Bu veri setindeki `Ozone` ve `Temp` değişkenlerinin aylara (`Month`) göre ortalamalarını bulmak için aşağıdaki satır komutları kullanılır.
 
 ```{r}
 head(airquality)
@@ -624,3 +624,4 @@ for (i in y) {
 ```
 
 </details>
+
