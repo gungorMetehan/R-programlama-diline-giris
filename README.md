@@ -9,7 +9,7 @@
 + [Yazar Hakkında [About the Author]](https://kitap.epodder.org/r-programlama-dili/index.html#yazar-hakk%C4%B1nda)
 + [Açıklamalar [Notes]](https://kitap.epodder.org/r-programlama-dili/index.html#a%C3%A7%C4%B1klamalar)
   
-[**1. R ve R Studio**](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html)
+[**1. R ve R Studio [R and R Studio]**](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html)
 
 + [R Nedir? [What is R?]](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#r-nedir)
 + [Neden R? [Why R?]](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html#neden-r)
