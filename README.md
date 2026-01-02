@@ -61,7 +61,7 @@
 + [rename() Fonksiyonu [rename() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#rename-fonksiyonu)
 + [group_by() Fonksiyonu [group_by() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#group_by-fonksiyonu)
 + [summarize() Fonksiyonu [summarize() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#summarize-fonksiyonu)
-+ [slice_*() Fonksiyonları [slice_*() Functions]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#slice_-fonksiyonlar%C4%B1)
++ [slice\_\*() Fonksiyonları [slice\_\*() Functions]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#slice_-fonksiyonlar%C4%B1)
 + [Pipe (|>) Bağlantı Operatörü [Pipe (|>) Operator]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#pipe-ba%C4%9Flant%C4%B1-operat%C3%B6r%C3%BC)
 + [Veri Setlerini Birleştirme (Join Fonksiyonları) [Combining Data Sets (Join Functions)]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#veri-setlerini-birle%C5%9Ftirme-join-fonksiyonlar%C4%B1)
 + [Alıştırmalar [Exercises]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#al%C4%B1%C5%9Ft%C4%B1rmalar-4)
