@@ -35,7 +35,7 @@
 + [Veri Yapıları Arasında Dönüşüm [Data Structure Conversion]](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#veri-yap%C4%B1lar%C4%B1-aras%C4%B1nda-d%C3%B6n%C3%BC%C5%9F%C3%BCm)
 + [Alıştırmalar [Exercises]](https://kitap.epodder.org/r-programlama-dili/04-Veri-Yapilari.html#al%C4%B1%C5%9Ft%C4%B1rmalar-1)
 
-[**5. Veri Yapılarıyla İşlemler**](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html)
+[**5. Veri Yapılarıyla İşlemler [Operations on Data Structures]**](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html)
 
 + [Vektörlerde İşlemler [Operations on Vectors]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#vekt%C3%B6rlerde-i%C5%9Flemler)
 + [Faktörlerde İşlemler [Operations on Factors]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#fakt%C3%B6rlerde-i%C5%9Flemler)
@@ -43,7 +43,7 @@
 + [Dizilerde İşlemler [Operations on Arrays]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#dizilerde-i%C5%9Flemler)
 + [Listelerde İşlemler [Operations on Lists]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#listelerde-i%C5%9Flemler)
 + [Data Frame’lerde İşlemler [Operations on Data Frames]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#data-framelerde-i%C5%9Flemler)
-+ [Alıştırmalar [Exercises](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#al%C4%B1%C5%9Ft%C4%B1rmalar-2)
++ [Alıştırmalar [Exercises]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#al%C4%B1%C5%9Ft%C4%B1rmalar-2)
 
 [**6. Veriyi İçe ve Dışa Aktarma [Importing and Exporting Data]**](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html)
 
