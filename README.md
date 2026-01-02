@@ -4,10 +4,10 @@
 
 ## İçindekiler (Contents)
 
-[**Sunuş**](https://kitap.epodder.org/r-programlama-dili/index.html#sunu%C5%9F)
+[**Sunuş [Preface]**](https://kitap.epodder.org/r-programlama-dili/index.html#sunu%C5%9F)
 
-+ [Yazar Hakkında](https://kitap.epodder.org/r-programlama-dili/index.html#yazar-hakk%C4%B1nda)
-+ [Açıklamalar](https://kitap.epodder.org/r-programlama-dili/index.html#a%C3%A7%C4%B1klamalar)
++ [Yazar Hakkında [About the Author]](https://kitap.epodder.org/r-programlama-dili/index.html#yazar-hakk%C4%B1nda)
++ [Açıklamalar [Notes]](https://kitap.epodder.org/r-programlama-dili/index.html#a%C3%A7%C4%B1klamalar)
   
 [**1. R ve R Studio**](https://kitap.epodder.org/r-programlama-dili/01-R-ve-RStudio.html)
 
@@ -37,13 +37,13 @@
 
 [**5. Veri Yapılarıyla İşlemler**](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html)
 
-+ [Vektörlerde İşlemler](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#vekt%C3%B6rlerde-i%C5%9Flemler)
-+ [Faktörlerde İşlemler](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#fakt%C3%B6rlerde-i%C5%9Flemler)
-+ [Matrislerde İşlemler](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#matrislerde-i%C5%9Flemler)
-+ [Dizilerde İşlemler](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#dizilerde-i%C5%9Flemler)
-+ [Listelerde İşlemler](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#listelerde-i%C5%9Flemler)
-+ [Data Frame’lerde İşlemler](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#data-framelerde-i%C5%9Flemler)
-+ [Alıştırmalar](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#al%C4%B1%C5%9Ft%C4%B1rmalar-2)
++ [Vektörlerde İşlemler [Operations on Vectors]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#vekt%C3%B6rlerde-i%C5%9Flemler)
++ [Faktörlerde İşlemler [Operations on Factors]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#fakt%C3%B6rlerde-i%C5%9Flemler)
++ [Matrislerde İşlemler [Operations on Matrices]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#matrislerde-i%C5%9Flemler)
++ [Dizilerde İşlemler [Operations on Arrays]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#dizilerde-i%C5%9Flemler)
++ [Listelerde İşlemler [Operations on Lists]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#listelerde-i%C5%9Flemler)
++ [Data Frame’lerde İşlemler [Operations on Data Frames]](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#data-framelerde-i%C5%9Flemler)
++ [Alıştırmalar [Exercises](https://kitap.epodder.org/r-programlama-dili/05-Veri-Yapilariyla-Islemler.html#al%C4%B1%C5%9Ft%C4%B1rmalar-2)
 
 [**6. Veriyi İçe ve Dışa Aktarma [Importing and Exporting Data]**](https://kitap.epodder.org/r-programlama-dili/06-Veriyi-Ice-Disa-Aktarma.html)
 
@@ -53,17 +53,17 @@
 
 [**7. Veri Düzenleme [Data Manipulation]**](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html)
 
-+ [filter() Fonksiyonu](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#filter-fonksiyonu)
-+ [arrange() Fonksiyonu](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#arrange-fonksiyonu)
-+ [distinct() Fonksiyonu](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#distinct-fonksiyonu)
-+ [mutate() Fonksiyonu](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#mutate-fonksiyonu)
-+ [select() Fonksiyonu](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#select-fonksiyonu)
-+ [rename() Fonksiyonu](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#rename-fonksiyonu)
-+ [group_by() Fonksiyonu](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#group_by-fonksiyonu)
-+ [summarize() Fonksiyonu](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#summarize-fonksiyonu)
-+ [slice_*() Fonksiyonları](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#slice_-fonksiyonlar%C4%B1)
-+ [Pipe (|>) Bağlantı Operatörü](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#pipe-ba%C4%9Flant%C4%B1-operat%C3%B6r%C3%BC)
-+ [Veri Setlerini Birleştirme (Join Fonksiyonları)](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#veri-setlerini-birle%C5%9Ftirme-join-fonksiyonlar%C4%B1)
++ [filter() Fonksiyonu [filter() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#filter-fonksiyonu)
++ [arrange() Fonksiyonu [arrange() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#arrange-fonksiyonu)
++ [distinct() Fonksiyonu [distinct() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#distinct-fonksiyonu)
++ [mutate() Fonksiyonu [mutate() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#mutate-fonksiyonu)
++ [select() Fonksiyonu [select() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#select-fonksiyonu)
++ [rename() Fonksiyonu [rename() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#rename-fonksiyonu)
++ [group_by() Fonksiyonu [group_by() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#group_by-fonksiyonu)
++ [summarize() Fonksiyonu [summarize() Function]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#summarize-fonksiyonu)
++ [slice_*() Fonksiyonları [slice_*() Functions]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#slice_-fonksiyonlar%C4%B1)
++ [Pipe (|>) Bağlantı Operatörü [Pipe (|>) Operator]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#pipe-ba%C4%9Flant%C4%B1-operat%C3%B6r%C3%BC)
++ [Veri Setlerini Birleştirme (Join Fonksiyonları) [Combining Data Sets (Join Functions)]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#veri-setlerini-birle%C5%9Ftirme-join-fonksiyonlar%C4%B1)
 + [Alıştırmalar [Exercises]](https://kitap.epodder.org/r-programlama-dili/07-Veri-Duzenleme.html#al%C4%B1%C5%9Ft%C4%B1rmalar-4)
 
 [**8. Koşul İfadeleri, Döngüler ve Fonksiyonlar [Conditional Statements, Loops and Functions]**](https://kitap.epodder.org/r-programlama-dili/08-Kosul-Ifadeleri-Donguler-Fonksiyonlar.html)
